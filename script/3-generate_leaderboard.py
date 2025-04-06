@@ -3,7 +3,7 @@ import csv
 from collections import defaultdict
 
 # Set the current week up to which the leaderboard will be generated (e.g., "week1")
-WEEK = "week1"
+WEEK = "week2"
 
 def get_numeric_week(week_name):
     """

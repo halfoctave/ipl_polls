@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DIRECTORY = os.path.join(BASE_DIR, '..', 'results', 'combined_csv')
 
 # Set the week up to which files will be processed (e.g., "week1")
-WEEK = "week1"
+WEEK = "week2"
 
 # Extract the numeric week number from the WEEK string (e.g., "week1" → 1)
 week_num = int(WEEK.replace("week", ""))
