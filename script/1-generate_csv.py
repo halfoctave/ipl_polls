@@ -83,14 +83,14 @@ def process_poll_to_csv(json_data, output_file):
 def main():
     """
     Process all JSON poll files for the specified week, converting them to CSV files.
-    Reads from the input directory and saves to the output directory relative to the script.
+    Reads from the input_json directory and saves to the output_csv directory relative to the script.
     """
     # Determine base paths relative to script location
-    script_dir = os.path.dirname(os.path.abspath(__file__))  # Script location (e.g., /IPL/script)
-    input_dir = os.path.join(script_dir, '..', 'input', WEEK)  # Input directory (e.g., /IPL/input/week1)
-    output_dir = os.path.join(script_dir, '..', 'output', WEEK)  # Output directory (e.g., /IPL/output/week1)
+    script_dir = os.path.dirname(os.path.abspath(__file__))  # Script location (e.g., ../script)
+    input_dir = os.path.join(script_dir, '..', 'input_json', WEEK)  # Input directory (e.g., ../input_json/week1)
+    output_dir = os.path.join(script_dir, '..', 'output_csv', WEEK)  # Output directory (e.g., ../output_csv/week1)
 
-    # Iterate through all JSON files in the input directory
+    # Iterate through all JSON files in the input_json directory
     for filename in os.listdir(input_dir):
         if filename.endswith('.json'):
             input_file = os.path.join(input_dir, filename)

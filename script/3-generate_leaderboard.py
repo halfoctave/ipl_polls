@@ -2,7 +2,7 @@ import os
 import csv
 from collections import defaultdict
 
-# Set the current week up to which the leaderboard will be generated (e.g., "week2")
+# Set the current week up to which the leaderboard will be generated (e.g., "week1")
 WEEK = "week1"
 
 def get_numeric_week(week_name):
@@ -19,7 +19,7 @@ def get_numeric_week(week_name):
 def generate_leaderboard(_):
     """
     Generate a leaderboard CSV from combined weekly CSV files up to the specified week.
-    The leaderboard includes points per week and a total, sorted by total points descending.
+    Includes points per week and a total (as floats for custom points), sorted by total points descending.
     
     Parameters:
         _ (None): Unused parameter for compatibility (can be ignored)
@@ -30,16 +30,16 @@ def generate_leaderboard(_):
     base_dir = os.path.dirname(__file__)
 
     # Define input and output directories relative to script location
-    input_dir = os.path.abspath(os.path.join(base_dir, "../result"))       # Input: e.g., /ipl/result
-    output_dir = os.path.abspath(os.path.join(base_dir, "../leaderboard")) # Output: e.g., /ipl/leaderboard
-    os.makedirs(output_dir, exist_ok=True)                                 # Create output directory if it doesn't exist
+    input_dir = os.path.abspath(os.path.join(base_dir, "../results/combined_csv"))  # Input: e.g., ../results/combined_csv
+    output_dir = os.path.abspath(os.path.join(base_dir, "../results/leaderboard"))  # Output: e.g., ../results/leaderboard
+    os.makedirs(output_dir, exist_ok=True)                                          # Create output directory if it doesn't exist
 
     # Define the output file path
-    output_file = os.path.join(output_dir, f"leaderboard_{WEEK}.csv")      # e.g., /ipl/leaderboard/leaderboard_week2.csv
+    output_file = os.path.join(output_dir, f"leaderboard_{WEEK}.csv")               # e.g., ../results/leaderboard/leaderboard_week1.csv
 
     # Get all combined week files from the input directory and sort them
     all_files = sorted(f for f in os.listdir(input_dir) if f.startswith("combined_week") and f.endswith(".csv"))
-    cutoff_week = get_numeric_week(WEEK)                                   # Numeric value of the target week (e.g., 2)
+    cutoff_week = get_numeric_week(WEEK)                                            # Numeric value of the target week (e.g., 1)
 
     # Filter files to include only those up to the specified week
     selected_files = [
@@ -47,7 +47,7 @@ def generate_leaderboard(_):
         if get_numeric_week(f.split('_')[1].split('.')[0]) <= cutoff_week
     ]
 
-    # Dictionary to store leaderboard data with default empty Display Name
+    # Dictionary to store leaderboard data with default empty Display Name and float-based points
     leaderboard = defaultdict(lambda: {'Display Name': ''})
 
     # List to track week columns for the CSV header
@@ -66,21 +66,21 @@ def generate_leaderboard(_):
                 username = row['Username'].strip()           # Clean username
                 display_name = row.get('Display Name', '').strip()  # Clean display name, default to empty
                 try:
-                    points = int(row.get('Total_Points', 0)) # Convert total points to int, default 0
+                    points = float(row.get('Total_Points', '0')) # Convert total points to float, default 0.0
                 except ValueError:
-                    points = 0
+                    points = 0.0                            # Use float default for invalid values
 
                 # Update leaderboard with user data
                 leaderboard[username]['Display Name'] = display_name
-                leaderboard[username][week_key] = points    # Store points for this week
+                leaderboard[username][week_key] = points    # Store points for this week as float
 
-    # Finalize leaderboard: fill missing weeks with 0 and compute total points
+    # Finalize leaderboard: fill missing weeks with 0.0 and compute total points as float
     for user_data in leaderboard.values():
-        total = 0
+        total = 0.0                                     # Initialize total as float
         for wk in week_columns:
-            user_data[wk] = user_data.get(wk, 0)        # Default to 0 if user missed a week
-            total += user_data[wk]                       # Sum points across weeks
-        user_data['Total'] = total                      # Set total points
+            user_data[wk] = user_data.get(wk, 0.0)      # Default to 0.0 if user missed a week
+            total += user_data[wk]                       # Sum points across weeks as float
+        user_data['Total'] = total                      # Set total points as float
 
     # Define CSV header with username, display name, week columns, and total
     fieldnames = ['Username', 'Display Name'] + week_columns + ['Total']
