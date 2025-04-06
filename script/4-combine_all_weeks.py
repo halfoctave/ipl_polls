@@ -4,8 +4,9 @@ from collections import defaultdict
 
 # Get the directory where the script is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Define the directory containing weekly combined CSV files (e.g., /ipl/result)
-DIRECTORY = os.path.join(BASE_DIR, '..', 'result')
+# Define the directory containing weekly combined CSV files (e.g., ../results/combined_csv)
+DIRECTORY = os.path.join(BASE_DIR, '..', 'results', 'combined_csv')
+
 # Set the week up to which files will be processed (e.g., "week1")
 WEEK = "week1"
 
@@ -18,7 +19,7 @@ try:
     csv_files.sort()  # Sort to ensure week1 comes before week2, etc.
 except FileNotFoundError:
     print(f"Directory not found: {DIRECTORY}")
-    print("Please ensure the 'result' directory exists relative to the script location and contains the CSV files")
+    print("Please ensure the 'results/combined_csv' directory exists relative to the script location and contains the CSV files")
     exit()
 
 # Filter files to include only those up to the specified week
@@ -38,8 +39,8 @@ if not week_files:
 # Dictionary to store combined user data with default values
 combined_data = defaultdict(lambda: {
     'Display Name': '',        # User's display name
-    'Matches': {},             # Dictionary of match data (team short name and points)
-    'Total_Points': 0          # Cumulative points across all matches
+    'Matches': {},             # Dictionary of match data (team short name and points as floats)
+    'Total_Points': 0.0        # Cumulative points across all matches as float
 })
 
 # Process each weekly CSV file with match number offsetting
@@ -73,11 +74,11 @@ for file in week_files:
                 if short_key in row and row[short_key] and row[short_key] != '---':
                     user_data['Matches'][global_match_num] = {
                         'Team_Short': row[short_key],         # Short team name voted
-                        'Points': int(row[points_key] or 0),  # Points for this match, default 0
+                        'Points': float(row[points_key] or '0'),  # Points for this match as float, default 0.0
                     }
             
-            # Add this week's total points to the user's cumulative total
-            user_data['Total_Points'] += int(row['Total_Points'] or 0)
+            # Add this week's total points to the user's cumulative total as float
+            user_data['Total_Points'] += float(row['Total_Points'] or '0')
     
     # Update the offset for the next week's matches
     current_match_offset += match_count
@@ -88,17 +89,20 @@ for matches in combined_data.values():
     if matches['Matches']:  # Check if the user has any match data
         max_matches = max(max_matches, max(matches['Matches'].keys()))
 
-# Prepare the output file path (e.g., /ipl/result/combined_upto_week1.csv)
-output_file = os.path.join(DIRECTORY, f'combined_upto_{WEEK}.csv')
+# Prepare the output file path (e.g., ../results/combined_leaderboard/combined_upto_week1.csv)
+output_dir = os.path.join(BASE_DIR, '..', 'results', 'combined_leaderboard')
+os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
+output_file = os.path.join(output_dir, f'combined_upto_{WEEK}.csv')
+
 with open(output_file, 'w', encoding='utf-8', newline='') as f:
     # Create CSV header with columns for all matches (short team names only)
     headers = ['Username', 'Display Name']
     for i in range(1, max_matches + 1):
         headers.extend([
             f'Match_{i}_Team_Short',  # Short team name for each match
-            f'Match_{i}_Points',      # Points for each match
+            f'Match_{i}_Points',      # Points for each match as float
         ])
-    headers.append('Total_Points')  # Final column for cumulative points
+    headers.append('Total_Points')  # Final column for cumulative points as float
     
     writer = csv.writer(f)
     writer.writerow(headers)
@@ -114,14 +118,14 @@ with open(output_file, 'w', encoding='utf-8', newline='') as f:
         for i in range(1, max_matches + 1):
             match = data['Matches'].get(i, {
                 'Team_Short': '---',  # Default for no vote
-                'Points': 0,          # Default points
+                'Points': 0.0,        # Default points as float
             })
             row.extend([
                 match['Team_Short'],
                 match['Points'],
             ])
         
-        row.append(data['Total_Points'])  # Append the total points
+        row.append(data['Total_Points'])  # Append the total points as float
         writer.writerow(row)
 
 # Print confirmation and summary statistics
