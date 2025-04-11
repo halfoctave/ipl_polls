@@ -1,6 +1,6 @@
 {
   "id": "c56dca6a-33f9-4748-9346-2ffe4c420442",
-  "winner": "",
+  "winner": "LSG",
   "points": 1.5,
   "channelId": "1354399464319615046",
   "messageId": "1359021336542052353",
@@ -515,6 +515,20 @@
         "banner": null
       },
       "createdAt": "2025-04-08T09:10:05.445Z"
+    },
+    {
+      "id": "d7f3b2e1-9c4a-4f8b-9a2c-5e6f7d8b9c0d",
+      "answerId": "83c587a9-bab3-4e1e-a958-a7f47f9fbec6",
+      "weight": 1,
+      "user": {
+        "id": "879416656525414451",
+        "username": "billuda",
+        "discriminator": "0",
+        "globalName": "𒆜 𝐁𝐈𝐋𝐋𝐔 𝐃𝐀 𒆜",
+        "avatar": "5c44cd41dd7df31a8d7dc85c1356a99e",
+        "banner": null
+      },
+      "createdAt": "2025-04-08T09:10:15.445Z"
     }
   ],
   "allowedRoles": []

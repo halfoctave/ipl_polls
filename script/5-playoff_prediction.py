@@ -20,7 +20,7 @@ def process_playoff_poll(input_file, output_file):
     """
     Process a playoff prediction poll JSON file and output results to CSV.
     Users predict 4 teams, earning points for each correct prediction.
-    Playoff teams are read from the 'playoffteams' key in the JSON.
+    Playoff teams are read from the 'playoffteams' key in the JSON file.
 
     Parameters:
         input_file (str): Path to the input JSON file
