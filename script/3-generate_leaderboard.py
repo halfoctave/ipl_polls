@@ -3,10 +3,10 @@ import csv
 from collections import defaultdict
 
 # Set the current week up to which the leaderboard will be generated (e.g., "week2")
-WEEK = "week2"
+WEEK = "week3"
 
 # Flag to control whether playoff points are included in the leaderboard
-INCLUDE_PLAYOFFS = False  # Set to True to include playoff points, False to exclude
+INCLUDE_PLAYOFFS = False  # Set to True to include playoff points, False to exclude. Also make sure that 5-playoff_prediction.py is executed before this is set true and executed
 
 def get_numeric_week(week_name):
     """

@@ -3,7 +3,7 @@ import csv
 import os
 
 # Set the current week to process (e.g., "week1")
-WEEK = "week2"
+WEEK = "week3"
 
 # Dictionary mapping full team names to their short abbreviations
 abbreviations = {

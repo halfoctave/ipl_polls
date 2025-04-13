@@ -3,7 +3,7 @@ import csv
 from collections import defaultdict
 
 # Set the current week to process (e.g., "week1")
-WEEK = "week2"
+WEEK = "week3"
 
 def combine_csv_files(directory, _):
     """
