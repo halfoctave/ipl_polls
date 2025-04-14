@@ -5,13 +5,46 @@ from collections import defaultdict
 # Set the current week to process (e.g., "week1")
 WEEK = "week3"
 
+def calculate_ranks(leaderboard, points_key='Total_Points'):
+    """
+    Calculate ranks for the leaderboard.
+    - Competitive Rank: Shared rank for tied points (1st, 2nd, 2nd, 3rd, ...).
+    - Sequential Rank: Counts distinct point totals (1st, 2nd, 2nd, 3rd, ...).
+    
+    Args:
+        leaderboard (list): List of dicts with user data, sorted by points_key descending.
+        points_key (str): Key for sorting points (default 'Total_Points').
+    Returns:
+        list: Updated leaderboard with 'Competitive Rank' and 'Sequential Rank' added.
+    """
+    if not leaderboard:
+        return leaderboard
+    
+    result = []
+    current_rank = 1
+    sequential_rank = 1
+    prev_points = None
+    
+    for i, entry in enumerate(leaderboard):
+        points = entry[points_key]
+        if prev_points is not None and points < prev_points:
+            current_rank = i + 1
+            sequential_rank += 1
+        entry['Competitive Rank'] = current_rank
+        entry['Sequential Rank'] = sequential_rank
+        result.append(entry)
+        prev_points = points
+    
+    return result
+
 def combine_csv_files(directory, _):
     """
     Combine all CSV files for a given week into a single CSV, sorted by Total_Points.
     Only short team names are included; points are processed as floats to support custom values.
+    Adds Sequential Rank and Competitive Rank columns at the beginning.
     
     Parameters:
-        directory (str): Path to the directory containing weekly CSV files (e.g., ../output_csv/week1)
+        directory (str): Path to the directory containing weekly CSV files (e.g., ../output_csv/week3)
         _ (None): Unused parameter for compatibility (can be ignored)
     Returns:
         str: Path to the combined output CSV file
@@ -20,9 +53,9 @@ def combine_csv_files(directory, _):
     base_dir = os.path.dirname(__file__)
     
     # Construct the input and output directories
-    directory = os.path.abspath(os.path.join(base_dir, "../output_csv", WEEK))  # Input: e.g., ../output_csv/week1
+    directory = os.path.abspath(os.path.join(base_dir, "../output_csv", WEEK))  # Input: e.g., ../output_csv/week3
     result_dir = os.path.abspath(os.path.join(base_dir, "../results/combined_csv"))  # Output directory: e.g., ../results/combined_csv
-    output_file = os.path.join(result_dir, f"combined_{WEEK}.csv")          # Output file: e.g., ../results/combined_csv/combined_week1.csv
+    output_file = os.path.join(result_dir, f"combined_{WEEK}.csv")          # Output file: e.g., ../results/combined_csv/combined_week3.csv
 
     # Check if the input directory exists
     if not os.path.exists(directory):
@@ -50,8 +83,6 @@ def combine_csv_files(directory, _):
                 username = row['Username']
                 display_name = row['Display Name']
                 team_short = row.get('Team Voted Short', '---')  # Short team name, default '---' if missing
-                # Commented out: Full team name processing
-                # team_full = row.get('Team Voted', '---')       # Full team name, default '---' if missing
                 points = row.get('Points', '0')                  # Points earned, default '0' if missing
 
                 # Convert points to float to handle custom values (e.g., 2.5), default to 0.0 if conversion fails
@@ -64,8 +95,6 @@ def combine_csv_files(directory, _):
                 user_data[username]['Display Name'] = display_name
                 user_data[username][f'Match_{match_number}_Team_Short'] = team_short
                 user_data[username][f'Match_{match_number}_Points'] = points
-                # Commented out: Storing full team name
-                # user_data[username][f'Match_{match_number}_Team'] = team_full
 
                 # Accumulate total points for the user as a float
                 user_data[username]['Total_Points'] += points
@@ -79,20 +108,25 @@ def combine_csv_files(directory, _):
                 if f'Match_{match_number}_Team_Short' not in user_data[username]:
                     user_data[username][f'Match_{match_number}_Team_Short'] = '---'
                     user_data[username][f'Match_{match_number}_Points'] = 0.0  # Use float default
-                    # Commented out: Default full team name
-                    # user_data[username][f'Match_{match_number}_Team'] = '---'
 
         match_number += 1  # Increment match number for the next file
 
-    # Dynamically generate column headers for all matches (short team names only)
-    fieldnames = ['Username', 'Display Name'] + \
-                 sum([[f'Match_{i}_Team_Short', f'Match_{i}_Points'] for i in range(1, match_number)], []) + \
-                 ['Total_Points']  # Total_Points follows the match columns
+    # Convert defaultdict to list for ranking
+    leaderboard_list = []
+    for username, data in user_data.items():
+        entry = {'Username': username, **data}
+        leaderboard_list.append(entry)
 
-    # Convert defaultdict to regular dict and sort by Total_Points in descending order
-    user_data = dict(
-        sorted(user_data.items(), key=lambda item: item[1]['Total_Points'], reverse=True)
-    )
+    # Sort by Total_Points descending, then Username ascending
+    leaderboard_list.sort(key=lambda x: (-x['Total_Points'], x['Username']))
+
+    # Calculate ranks
+    leaderboard_list = calculate_ranks(leaderboard_list, 'Total_Points')
+
+    # Dynamically generate column headers for all matches (short team names only)
+    fieldnames = ['Sequential Rank', 'Competitive Rank', 'Username', 'Display Name'] + \
+                 sum([[f'Match_{i}_Team_Short', f'Match_{i}_Points'] for i in range(1, match_number)], []) + \
+                 ['Total_Points']
 
     # Ensure the output directory exists
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
@@ -101,11 +135,7 @@ def combine_csv_files(directory, _):
     with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-
-        # Write each user's data as a row
-        for username, data in user_data.items():
-            row = {'Username': username, **data}
-            writer.writerow(row)
+        writer.writerows(leaderboard_list)
 
     print("Combined CSV file written successfully.")
     return output_file  # Return the path to the created file
@@ -119,4 +149,5 @@ if __name__ == "__main__":
     final_output = combine_csv_files(directory_path, None)
 
     # Print the location of the saved file
-    print(f"Combined CSV file saved as '{final_output}'")
+    if final_output:
+        print(f"Combined CSV file saved as '{final_output}'")

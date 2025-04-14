@@ -2,28 +2,60 @@ import os
 import csv
 from collections import defaultdict
 
-# Set the current week up to which the leaderboard will be generated (e.g., "week2")
+# Set the current week up to which the leaderboard will be generated (e.g., "week1")
 WEEK = "week3"
 
 # Flag to control whether playoff points are included in the leaderboard
-INCLUDE_PLAYOFFS = False  # Set to True to include playoff points, False to exclude. Also make sure that 5-playoff_prediction.py is executed before this is set true and executed
+INCLUDE_PLAYOFFS = False  # Set to True to include playoff points, False to exclude
 
 def get_numeric_week(week_name):
     """
     Extract the numeric part from a week name string.
     
     Args:
-        week_name (str): Week identifier (e.g., 'week2')
+        week_name (str): Week identifier (e.g., 'week3')
     Returns:
-        int: Numeric week number (e.g., 2)
+        int: Numeric week number (e.g., 3)
     """
     return int(week_name.lower().replace("week", "").strip())
+
+def calculate_ranks(leaderboard, points_key='Total'):
+    """
+    Calculate ranks for the leaderboard.
+    - Competitive Rank: Shared rank for tied points (1st, 2nd, 2nd, 3rd, ...).
+    - Sequential Rank: Counts distinct point totals (1st, 2nd, 2nd, 3rd, ...).
+    
+    Args:
+        leaderboard (list): List of dicts with user data, sorted by points_key descending.
+        points_key (str): Key for sorting points (default 'Total').
+    Returns:
+        list: Updated leaderboard with 'Competitive Rank' and 'Sequential Rank' added.
+    """
+    if not leaderboard:
+        return leaderboard
+    
+    result = []
+    current_rank = 1
+    sequential_rank = 1
+    prev_points = None
+    
+    for i, entry in enumerate(leaderboard):
+        points = entry[points_key]
+        if prev_points is not None and points < prev_points:
+            current_rank = i + 1
+            sequential_rank += 1
+        entry['Competitive Rank'] = current_rank
+        entry['Sequential Rank'] = sequential_rank
+        result.append(entry)
+        prev_points = points
+    
+    return result
 
 def generate_leaderboard(_):
     """
     Generate a leaderboard CSV from combined weekly CSV files up to the specified week,
-    optionally including playoff prediction points based on the INCLUDE_PLAYOFFS flag.
-    Includes points per week, optionally playoff points, and a total (as floats), sorted by total points descending.
+    optionally including playoff points based on the INCLUDE_PLAYOFFS flag.
+    Includes points per week, optionally playoff points, total, and Sequential/Competitive Rank columns.
     
     Parameters:
         _ (None): Unused parameter for compatibility (can be ignored)
@@ -34,17 +66,17 @@ def generate_leaderboard(_):
     base_dir = os.path.dirname(__file__)
 
     # Define input and output directories relative to script location
-    input_dir = os.path.abspath(os.path.join(base_dir, "../results/combined_csv"))  # Input for weeks: e.g., ../results/combined_csv
-    playoff_input_dir = os.path.abspath(os.path.join(base_dir, "../output_csv"))   # Input for playoffs: e.g., ../output_csv
-    output_dir = os.path.abspath(os.path.join(base_dir, "../results/leaderboard")) # Output: e.g., ../results/leaderboard
-    os.makedirs(output_dir, exist_ok=True)                                         # Create output directory if it doesn't exist
+    input_dir = os.path.abspath(os.path.join(base_dir, "../results/combined_csv"))  # Input for weeks
+    playoff_input_dir = os.path.abspath(os.path.join(base_dir, "../output_csv"))   # Input for playoffs
+    output_dir = os.path.abspath(os.path.join(base_dir, "../results/leaderboard")) # Output
+    os.makedirs(output_dir, exist_ok=True)
 
     # Define the output file path
     output_file = os.path.join(output_dir, f"leaderboard_{WEEK}{'_with_playoffs' if INCLUDE_PLAYOFFS else ''}.csv")
 
     # Get all combined week files from the input directory and sort them
     all_files = sorted(f for f in os.listdir(input_dir) if f.startswith("combined_week") and f.endswith(".csv"))
-    cutoff_week = get_numeric_week(WEEK)                                           # Numeric value of the target week (e.g., 2)
+    cutoff_week = get_numeric_week(WEEK)
 
     # Filter files to include only those up to the specified week
     selected_files = [
@@ -99,32 +131,33 @@ def generate_leaderboard(_):
         else:
             print(f"Warning: Playoff file '{playoff_file}' not found. Proceeding without playoff points.")
 
-    # Finalize leaderboard: fill missing weeks/playoffs with 0.0 and compute total points as float
+    # Convert to list and calculate totals
+    leaderboard_list = []
     columns = week_columns + (['Playoffs'] if INCLUDE_PLAYOFFS else [])
-    for user_data in leaderboard.values():
-        total = 0.0                                     # Initialize total as float
+    for username, data in leaderboard.items():
+        entry = {'Username': username, 'Display Name': data['Display Name']}
+        total = 0.0
         for col in columns:
-            user_data[col] = user_data.get(col, 0.0)    # Default to 0.0 if user missed a week/playoffs
-            total += user_data[col]                      # Sum points across weeks and playoffs as float
-        user_data['Total'] = total                      # Set total points as float
+            points = data.get(col, 0.0)
+            entry[col] = points
+            total += points
+        entry['Total'] = total
+        leaderboard_list.append(entry)
 
-    # Define CSV header with username, display name, week columns, playoffs (if included), and total
-    fieldnames = ['Username', 'Display Name'] + columns + ['Total']
+    # Sort by Total descending, then Username ascending
+    leaderboard_list.sort(key=lambda x: (-x['Total'], x['Username']))
 
-    # Convert to regular dict and sort by total points in descending order
-    leaderboard = dict(
-        sorted(leaderboard.items(), key=lambda item: item[1]['Total'], reverse=True)
-    )
+    # Calculate ranks
+    leaderboard_list = calculate_ranks(leaderboard_list, 'Total')
+
+    # Define CSV header with rank columns, username, display name, week columns, playoffs (if included), and total
+    fieldnames = ['Sequential Rank', 'Competitive Rank', 'Username', 'Display Name'] + columns + ['Total']
 
     # Write the leaderboard to a CSV file
     with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-
-        # Write each user's data as a row
-        for username, data in leaderboard.items():
-            row = {'Username': username, **data}
-            writer.writerow(row)
+        writer.writerows(leaderboard_list)
 
     print("Leaderboard CSV file written successfully.")
     return output_file  # Return the path to the generated file
@@ -134,4 +167,5 @@ if __name__ == "__main__":
     # Generate the leaderboard and get the output file path
     output_file = generate_leaderboard(None)
     # Print confirmation of where the leaderboard was saved
-    print(f"Leaderboard saved as '{output_file}'")
+    if output_file:
+        print(f"Leaderboard saved as '{output_file}'")

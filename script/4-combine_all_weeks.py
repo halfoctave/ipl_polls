@@ -10,7 +10,39 @@ DIRECTORY = os.path.join(BASE_DIR, '..', 'results', 'combined_csv')
 # Set the week up to which files will be processed (e.g., "week1")
 WEEK = "week3"
 
-# Extract the numeric week number from the WEEK string (e.g., "week1" → 1)
+def calculate_ranks(leaderboard, points_key='Total_Points'):
+    """
+    Calculate ranks for the leaderboard.
+    - Competitive Rank: Shared rank for tied points (1st, 2nd, 2nd, 3rd, ...).
+    - Sequential Rank: Counts distinct point totals (1st, 2nd, 2nd, 3rd, ...).
+    
+    Args:
+        leaderboard (list): List of dicts with user data, sorted by points_key descending.
+        points_key (str): Key for sorting points (default 'Total_Points').
+    Returns:
+        list: Updated leaderboard with 'Competitive Rank' and 'Sequential Rank' added.
+    """
+    if not leaderboard:
+        return leaderboard
+    
+    result = []
+    current_rank = 1
+    sequential_rank = 1
+    prev_points = None
+    
+    for i, entry in enumerate(leaderboard):
+        points = entry[points_key]
+        if prev_points is not None and points < prev_points:
+            current_rank = i + 1
+            sequential_rank += 1
+        entry['Competitive Rank'] = current_rank
+        entry['Sequential Rank'] = sequential_rank
+        result.append(entry)
+        prev_points = points
+    
+    return result
+
+# Extract the numeric week number from the WEEK string (e.g., "week3" → 3)
 week_num = int(WEEK.replace("week", ""))
 
 # Get all CSV files in the directory and sort them alphabetically
@@ -89,14 +121,31 @@ for matches in combined_data.values():
     if matches['Matches']:  # Check if the user has any match data
         max_matches = max(max_matches, max(matches['Matches'].keys()))
 
-# Prepare the output file path (e.g., ../results/combined_leaderboard/combined_upto_week1.csv)
+# Convert combined_data to a list for ranking
+leaderboard_list = []
+for username, data in combined_data.items():
+    entry = {
+        'Username': username,
+        'Display Name': data['Display Name'],
+        'Total_Points': data['Total_Points'],
+        'Matches': data['Matches']
+    }
+    leaderboard_list.append(entry)
+
+# Sort by Total_Points descending, then Username ascending
+leaderboard_list.sort(key=lambda x: (-x['Total_Points'], x['Username']))
+
+# Calculate ranks
+leaderboard_list = calculate_ranks(leaderboard_list, 'Total_Points')
+
+# Prepare the output file path (e.g., ../results/combined_leaderboard/combined_upto_week3.csv)
 output_dir = os.path.join(BASE_DIR, '..', 'results', 'combined_leaderboard')
 os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
 output_file = os.path.join(output_dir, f'combined_upto_{WEEK}.csv')
 
 with open(output_file, 'w', encoding='utf-8', newline='') as f:
-    # Create CSV header with columns for all matches (short team names only)
-    headers = ['Username', 'Display Name']
+    # Create CSV header with ranks and all matches (short team names only)
+    headers = ['Sequential Rank', 'Competitive Rank', 'Username', 'Display Name']
     for i in range(1, max_matches + 1):
         headers.extend([
             f'Match_{i}_Team_Short',  # Short team name for each match
@@ -107,16 +156,18 @@ with open(output_file, 'w', encoding='utf-8', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(headers)
     
-    # Sort data by Total_Points (descending) and then by username (ascending) for ties
-    sorted_data = sorted(combined_data.items(), key=lambda x: (-x[1]['Total_Points'], x[0]))
-    
     # Write sorted data to the CSV
-    for username, data in sorted_data:
-        row = [username, data['Display Name']]
+    for entry in leaderboard_list:
+        row = [
+            entry['Sequential Rank'],
+            entry['Competitive Rank'],
+            entry['Username'],
+            entry['Display Name']
+        ]
         
         # Add match data for each position, filling with defaults if missing
         for i in range(1, max_matches + 1):
-            match = data['Matches'].get(i, {
+            match = entry['Matches'].get(i, {
                 'Team_Short': '---',  # Default for no vote
                 'Points': 0.0,        # Default points as float
             })
@@ -125,7 +176,7 @@ with open(output_file, 'w', encoding='utf-8', newline='') as f:
                 match['Points'],
             ])
         
-        row.append(data['Total_Points'])  # Append the total points as float
+        row.append(entry['Total_Points'])  # Append the total points as float
         writer.writerow(row)
 
 # Print confirmation and summary statistics

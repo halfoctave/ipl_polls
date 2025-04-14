@@ -16,6 +16,38 @@ SHORT_NAMES = {
     "Sunrisers Hyderabad": "SRH"
 }
 
+def calculate_ranks(leaderboard, points_key='Points'):
+    """
+    Calculate ranks for the leaderboard.
+    - Competitive Rank: Shared rank for tied points (1st, 2nd, 2nd, 3rd, ...).
+    - Sequential Rank: Counts distinct point totals (1st, 2nd, 2nd, 3rd, ...).
+    
+    Args:
+        leaderboard (list): List of dicts with user data, sorted by points_key descending.
+        points_key (str): Key for sorting points (default 'Points').
+    Returns:
+        list: Updated leaderboard with 'Competitive Rank' and 'Sequential Rank' added.
+    """
+    if not leaderboard:
+        return leaderboard
+    
+    result = []
+    current_rank = 1
+    sequential_rank = 1
+    prev_points = None
+    
+    for i, entry in enumerate(leaderboard):
+        points = entry[points_key]
+        if prev_points is not None and points < prev_points:
+            current_rank = i + 1
+            sequential_rank += 1
+        entry['Competitive Rank'] = current_rank
+        entry['Sequential Rank'] = sequential_rank
+        result.append(entry)
+        prev_points = points
+    
+    return result
+
 def process_playoff_poll(input_file, output_file):
     """
     Process a playoff prediction poll JSON file and output results to CSV.
@@ -86,11 +118,14 @@ def process_playoff_poll(input_file, output_file):
     # Sort results by points (descending) and username (ascending) for ties
     results.sort(key=lambda x: (-x["Points"], x["Username"]))
 
+    # Calculate ranks
+    results = calculate_ranks(results, 'Points')
+
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
     # Write to CSV
-    headers = ["Username", "Display Name", "Predicted Teams", "Correct Picks", "Points"]
+    headers = ["Sequential Rank", "Competitive Rank", "Username", "Display Name", "Predicted Teams", "Correct Picks", "Points"]
     with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=headers)
         writer.writeheader()
@@ -113,5 +148,5 @@ if __name__ == "__main__":
     # Output CSV file
     output_file = os.path.join(output_dir, "playoff_prediction.csv")
 
-    # Process the poll (no playoff_teams parameter needed now)
+    # Process the poll
     process_playoff_poll(input_file, output_file)
