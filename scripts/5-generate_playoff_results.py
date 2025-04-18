@@ -120,7 +120,7 @@ def process_playoff_poll(input_file, output_file):
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     headers = ["Dense Rank", "Standard Rank", "Username", "Display Name", 
                "Predicted Teams", "Correct Picks", "Points"]
-    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
+    with open(output_file, 'w', newline='', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=headers)
         writer.writeheader()
         writer.writerows(results)

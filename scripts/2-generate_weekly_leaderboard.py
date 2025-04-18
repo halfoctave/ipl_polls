@@ -68,7 +68,7 @@ def combine_csv_files(input_dir):
     for file in all_files:
         file_path = os.path.join(input_dir, file)
         try:
-            with open(file_path, newline='', encoding='utf-8') as csvfile:
+            with open(file_path, newline='', encoding='utf-8-sig') as csvfile:
                 reader = csv.DictReader(csvfile)
                 if not required_headers.issubset(reader.fieldnames):
                     print(f"Error: Missing required headers in '{file}'")
@@ -113,7 +113,7 @@ def combine_csv_files(input_dir):
                  ['Total_Points']
 
     os.makedirs(result_dir, exist_ok=True)
-    with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
+    with open(output_file, mode='w', newline='', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(leaderboard_list)

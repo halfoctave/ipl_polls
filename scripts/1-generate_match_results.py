@@ -71,7 +71,7 @@ def process_poll_to_csv(json_data, output_file):
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     # Write to CSV
-    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
+    with open(output_file, 'w', newline='', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=headers)
         writer.writeheader()
         writer.writerows(csv_rows)

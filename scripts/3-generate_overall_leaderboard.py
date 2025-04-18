@@ -131,7 +131,7 @@ def generate_leaderboard():
 
         filepath = os.path.join(input_dir, file)
         try:
-            with open(filepath, newline='', encoding='utf-8') as csvfile:
+            with open(filepath, newline='', encoding='utf-8-sig') as csvfile:
                 reader = csv.DictReader(csvfile)
                 if 'Total_Points' not in reader.fieldnames:
                     print(f"Error: Missing 'Total_Points' in '{file}'")
@@ -152,7 +152,7 @@ def generate_leaderboard():
         playoff_file = os.path.join(playoff_input_dir, "playoff_prediction.csv")
         if os.path.exists(playoff_file):
             try:
-                with open(playoff_file, newline='', encoding='utf-8') as csvfile:
+                with open(playoff_file, newline='', encoding='utf-8-sig') as csvfile:
                     reader = csv.DictReader(csvfile)
                     if 'Points' not in reader.fieldnames:
                         print(f"Error: Missing 'Points' in '{playoff_file}'")
@@ -198,7 +198,7 @@ def generate_leaderboard():
     fieldnames = ['Dense Rank', 'Dense Rank Movement', 'Standard Rank', 'Standard Rank Movement',
                   'Username', 'Display Name'] + columns + ['Total']
 
-    with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
+    with open(output_file, mode='w', newline='', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(leaderboard_list)

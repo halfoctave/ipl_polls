@@ -65,7 +65,7 @@ def generate_detailed_leaderboard():
 
     for file in week_files:
         try:
-            with open(file, 'r', encoding='utf-8') as f:
+            with open(file, 'r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
                 sample_row = next(reader, None)
                 if not sample_row or 'Total_Points' not in sample_row:
@@ -129,7 +129,7 @@ def generate_detailed_leaderboard():
         headers.extend([f'Match_{i}_Team_Short', f'Match_{i}_Points'])
     headers.append('Total_Points')
 
-    with open(output_file, 'w', encoding='utf-8', newline='') as f:
+    with open(output_file, 'w', encoding='utf-8-sig', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=headers)
         writer.writeheader()
         
