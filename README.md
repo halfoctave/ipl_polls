@@ -31,7 +31,7 @@ ipl_polls/
 │   │   │   └── ...
 │   │   ├── week2/
 │   │   ├── week3/
-│   │   └── playoff.json
+│   │   └── playoff_predictions.json
 │   ├── processed/
 │   │   ├── week1/
 │   │   │   ├── 1-MIvsRR.csv
@@ -39,7 +39,7 @@ ipl_polls/
 │   │   │   └── ...
 │   │   ├── week2/
 │   │   ├── week3/
-│   │   └── playoff_prediction.csv
+│   │   └── playoff_predictions.csv
 ├── results/
 │   ├── weekly/
 │   │   ├── week1.csv
@@ -66,8 +66,8 @@ ipl_polls/
 └── README.md
 ```
 
-- **data/raw/**: Contains input JSON poll files (match polls in `weekN/` subfolders, playoff poll as `playoff.json`).
-- **data/processed/**: Stores processed CSV outputs (match CSVs in `weekN/`, playoff CSV as `playoff_prediction.csv`).
+- **data/raw/**: Contains input JSON poll files (match polls in `weekN/` subfolders, playoff poll as `playoff_predictions.json`).
+- **data/processed/**: Stores processed CSV outputs (match CSVs in `weekN/`, playoff CSV as `playoff_predictions.csv`).
 - **results/**: Holds leaderboard CSVs (`weekly/`, `overall/`, `detailed/`) and rank JSONs (`ranks/`).
 - **ipl_polls/**: Contains Python scripts and a `logs/` folder (optional, for future logging).
 - **README.md**: This file.
@@ -93,7 +93,7 @@ The project includes five Python scripts, each with a specific role:
 3. `3-generate_overall_leaderboard.py`
 
    - **Purpose**: Aggregates points across weeks (optionally including playoffs) into an overall leaderboard with rank movement.
-   - **Input**: CSVs in `results/weekly/`, optionally `data/processed/playoff_prediction.csv`, previous ranks in `results/ranks/`.
+   - **Input**: CSVs in `results/weekly/`, optionally `data/processed/playoff_predictions.csv`, previous ranks in `results/ranks/`.
    - **Output**: CSV in `results/overall/overall_weekN.csv`, JSON in `results/ranks/ranks_overall_weekN.json`.
    - **Key Features**: Tracks `Dense Rank Movement` and `Standard Rank Movement` (e.g., `↑2`, `↓1`, `—`, `N`).
 
@@ -107,8 +107,8 @@ The project includes five Python scripts, each with a specific role:
 5. `5-generate_playoff_results.py`
 
    - **Purpose**: Processes playoff prediction polls, awarding points for correct team picks.
-   - **Input**: JSON in `data/raw/playoff.json`.
-   - **Output**: CSV in `data/processed/playoff_prediction.csv`.
+   - **Input**: JSON in `data/raw/playoff_predictions.json`.
+   - **Output**: CSV in `data/processed/playoff_predictions.csv`.
    - **Key Features**: Handles multiple votes per user (4 teams), calculates points for correct picks, includes rankings.
 
 ## Prerequisites
@@ -142,7 +142,7 @@ The project includes five Python scripts, each with a specific role:
 3. **Prepare Input Data**:
 
    - Place match poll JSON files in `data/raw/weekN/` (e.g., `data/raw/week3/1-MIvsRR.json`).
-   - Place playoff poll JSON in `data/raw/playoff.json`.
+   - Place playoff poll JSON in `data/raw/playoff_predictions.json`.
    - See Input File Formats for JSON structure.
 
 4. **Create Output Directories** (optional):
@@ -157,7 +157,7 @@ Run the scripts in sequence to process polls and generate leaderboards. Update t
 
    ```bash
    cd ipl_polls
-   python generate_match_results.py
+   python 1-generate_match_results.py
    ```
 
    - Processes all JSONs in `data/raw/week3/` into CSVs in `data/processed/week3/`.
@@ -165,7 +165,7 @@ Run the scripts in sequence to process polls and generate leaderboards. Update t
 2. **Generate Weekly Leaderboard**:
 
    ```bash
-   python generate_weekly_leaderboard.py
+   python 2-generate_weekly_leaderboard.py
    ```
 
    - Combines CSVs from `data/processed/week3/` into `results/weekly/week3.csv`.
@@ -173,16 +173,16 @@ Run the scripts in sequence to process polls and generate leaderboards. Update t
 3. **Generate Overall Leaderboard**:
 
    ```bash
-   python generate_overall_leaderboard.py
+   python 3-generate_overall_leaderboard.py
    ```
 
    - Aggregates CSVs from `results/weekly/` into `results/overall/overall_week3.csv`.
-   - Set `INCLUDE_PLAYOFFS = True` to include `data/processed/playoff_prediction.csv`.
+   - Set `INCLUDE_PLAYOFFS = True` to include `data/processed/playoff_predictions.csv`.
 
 4. **Generate Detailed Leaderboard**:
 
    ```bash
-   python generate_detailed_leaderboard.py
+   python 4-generate_detailed_leaderboard.py
    ```
 
    - Creates `results/detailed/detailed_week3.csv` from `results/weekly/` CSVs.
@@ -190,21 +190,21 @@ Run the scripts in sequence to process polls and generate leaderboards. Update t
 5. **Process Playoff Poll**:
 
    ```bash
-   python generate_playoff_results.py
+   python 5-generate_playoff_results.py
    ```
 
-   - Converts `data/raw/playoff.json` into `data/processed/playoff_prediction.csv`.
+   - Converts `data/raw/playoff_predictions.json` into `data/processed/playoff_predictions.csv`.
 
 ### Example Workflow
 
-For IPL week 3:
+Like for IPL week 3:
 
 1. Place JSONs (e.g., `1-MIvsRR.json`, `2-CSKvsKKR.json`) in `data/raw/week3/`.
-2. Run `generate_match_results.py` to create CSVs in `data/processed/week3/`.
-3. Run `generate_weekly_leaderboard.py` to create `results/weekly/week3.csv`.
-4. Run `generate_overall_leaderboard.py` to create `results/overall/overall_week3.csv`.
-5. Run `generate_detailed_leaderboard.py` to create `results/detailed/detailed_week3.csv`.
-6. Place `playoff.json` in `data/raw/` and run `generate_playoff_results.py` to create `data/processed/playoff_prediction.csv`.
+2. Run `1-generate_match_results.py` to create CSVs in `data/processed/week3/`.
+3. Run `2-generate_weekly_leaderboard.py` to create `results/weekly/week3.csv`.
+4. Run `3-generate_overall_leaderboard.py` to create `results/overall/overall_week3.csv`.
+5. Run `4-generate_detailed_leaderboard.py` to create `results/detailed/detailed_week3.csv`.
+6. Place `playoff_predictions.json` in `data/raw/` and run `5-generate_playoff_results.py` to create `data/processed/playoff_predictions.csv`.
 
 ## Input File Formats
 
@@ -236,7 +236,7 @@ For IPL week 3:
 - `answers`: List of team options (full names).
 - `votes`: List of user votes with `user` details and `answerId`.
 
-### Playoff Poll JSON (`data/raw/playoff.json`)
+### Playoff Poll JSON (`data/raw/playoff_predictions.json`)
 
 ```json
 {
@@ -259,14 +259,14 @@ For IPL week 3:
       "answerId": "2"
     }
   ],
-  "playoffteams": ["CSK", "KKR", "MI", "RR"]
+  "qualifiedteams": ["RCB", "DC", "GT", "PBKS"]
 }
 ```
 
 - `points`: Points per correct team prediction (e.g., `4.0`).
 - `answers`: List of team options (full names).
 - `votes`: List of user votes (each user can vote for 4 teams).
-- `playoffteams`: List of 4 correct playoff teams (short names).
+- `qualifiedteams`: List of 4 correct playoff teams (short names).
 
 ### CSV Outputs
 
@@ -278,7 +278,7 @@ For IPL week 3:
   user2,User Two,RR,Rajasthan Royals,0.0
   ```
 
-- **Playoff CSV** (`data/processed/playoff_prediction.csv`):
+- **Playoff CSV** (`data/processed/playoff_predictions.csv`):
 
   ```
   Dense Rank,Standard Rank,Username,Display Name,Predicted Teams,Correct Picks,Points

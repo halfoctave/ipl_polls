@@ -76,7 +76,7 @@ def process_playoff_poll(input_file, output_file):
     points_per_correct = float(data.get("points", 0))
     answers = {answer["id"]: answer["name"] for answer in data["answers"]}
     
-    playoff_teams = data.get("playoffteams", [])
+    playoff_teams = data.get("qualifiedteams", [])
     if not playoff_teams or len(playoff_teams) != 4:
         print(f"Error: 'playoffteams' must contain exactly 4 teams, got {len(playoff_teams)}")
         return
@@ -131,6 +131,6 @@ def process_playoff_poll(input_file, output_file):
 
 if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    input_file = os.path.join(base_dir, "..", "data", "raw", "playoff.json")
-    output_file = os.path.join(base_dir, "..", "data", "processed", "playoff_prediction.csv")
+    input_file = os.path.join(base_dir, "..", "data", "raw", "playoff_predictions.json")
+    output_file = os.path.join(base_dir, "..", "data", "processed", "playoff_predictions.csv")
     process_playoff_poll(input_file, output_file)
