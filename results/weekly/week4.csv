@@ -1,0 +1,71 @@
+﻿Dense Rank,Standard Rank,Username,Display Name,Match_1_Team_Short,Match_1_Points,Match_2_Team_Short,Match_2_Points,Match_3_Team_Short,Match_3_Points,Match_4_Team_Short,Match_4_Points,Match_5_Team_Short,Match_5_Points,Match_6_Team_Short,Match_6_Points,Match_7_Team_Short,Match_7_Points,Match_8_Team_Short,Match_8_Points,Match_9_Team_Short,Match_9_Points,Total_Points
+1,1,jadelessbarukan,jadeless,LSG,0.0,PBKS,1.0,DC,1.0,MI,1.0,PBKS,1.0,GT,2.0,LSG,2.0,RCB,2.0,MI,2.0,12.0
+2,2,rishavmaiti,rishavmaiti,CSK,1.0,PBKS,1.0,DC,1.0,MI,1.0,PBKS,1.0,GT,2.0,RR,0.0,RCB,2.0,MI,2.0,11.0
+3,3,maverick7749,Mav,LSG,0.0,PBKS,1.0,DC,1.0,MI,1.0,PBKS,1.0,GT,2.0,RR,0.0,RCB,2.0,MI,2.0,10.0
+3,3,thefarzi,Farzi,LSG,0.0,KKR,0.0,DC,1.0,MI,1.0,RCB,0.0,GT,2.0,LSG,2.0,RCB,2.0,MI,2.0,10.0
+3,3,thewebshooter,TheWebShooter,LSG,0.0,PBKS,1.0,DC,1.0,MI,1.0,PBKS,1.0,GT,2.0,LSG,2.0,PBKS,0.0,MI,2.0,10.0
+3,3,vahgar,Allen The Alien,CSK,1.0,PBKS,1.0,RR,0.0,MI,1.0,PBKS,1.0,GT,2.0,RR,0.0,RCB,2.0,MI,2.0,10.0
+4,7,elprofesor6338,Èl Profesor™,CSK,1.0,KKR,0.0,DC,1.0,MI,1.0,RCB,0.0,GT,2.0,RR,0.0,RCB,2.0,MI,2.0,9.0
+4,7,static_25,Static,CSK,1.0,PBKS,1.0,DC,1.0,MI,1.0,PBKS,1.0,GT,2.0,RR,0.0,PBKS,0.0,MI,2.0,9.0
+5,9,apurv5411,APURV,LSG,0.0,PBKS,1.0,DC,1.0,SRH,0.0,RCB,0.0,DC,0.0,LSG,2.0,RCB,2.0,MI,2.0,8.0
+5,9,fezvaz,Vaz,,,KKR,0.0,DC,1.0,MI,1.0,RCB,0.0,DC,0.0,LSG,2.0,RCB,2.0,MI,2.0,8.0
+5,9,fullmetal77,FullMetal77,CSK,1.0,PBKS,1.0,DC,1.0,MI,1.0,RCB,0.0,DC,0.0,LSG,2.0,---,0.0,MI,2.0,8.0
+5,9,khanatfarm,KHANatFARM,LSG,0.0,KKR,0.0,DC,1.0,MI,1.0,RCB,0.0,GT,2.0,LSG,2.0,PBKS,0.0,MI,2.0,8.0
+5,9,roarycat,RoaryCat,LSG,0.0,PBKS,1.0,RR,0.0,SRH,0.0,PBKS,1.0,GT,2.0,LSG,2.0,PBKS,0.0,MI,2.0,8.0
+5,9,the_mizer,DrVimp,LSG,0.0,KKR,0.0,DC,1.0,MI,1.0,RCB,0.0,DC,0.0,LSG,2.0,RCB,2.0,MI,2.0,8.0
+6,15,light_itachi_op,Lassi Lover,LSG,0.0,PBKS,1.0,DC,1.0,MI,1.0,RCB,0.0,DC,0.0,LSG,2.0,PBKS,0.0,MI,2.0,7.0
+6,15,tushar07019,,LSG,0.0,PBKS,1.0,DC,1.0,SRH,0.0,PBKS,1.0,DC,0.0,LSG,2.0,PBKS,0.0,MI,2.0,7.0
+7,17,astrobot_7,PS_USER,CSK,1.0,PBKS,1.0,RR,0.0,MI,1.0,PBKS,1.0,GT,2.0,RR,0.0,PBKS,0.0,CSK,0.0,6.0
+7,17,billuda,𒆜 𝐁𝐈𝐋𝐋𝐔 𝐃𝐀 𒆜,CSK,1.0,KKR,0.0,RR,0.0,MI,1.0,RCB,0.0,GT,2.0,RR,0.0,RCB,2.0,CSK,0.0,6.0
+7,17,crazybats_v,Casper,LSG,0.0,PBKS,1.0,DC,1.0,SRH,0.0,RCB,0.0,GT,2.0,RR,0.0,RCB,2.0,CSK,0.0,6.0
+7,17,ind_mafia_sahil,IND_Mafia_Sahil,LSG,0.0,PBKS,1.0,DC,1.0,SRH,0.0,RCB,0.0,DC,0.0,LSG,2.0,PBKS,0.0,MI,2.0,6.0
+7,17,slidemaster0547,Slide Master,LSG,0.0,KKR,0.0,DC,1.0,MI,1.0,RCB,0.0,DC,0.0,LSG,2.0,PBKS,0.0,MI,2.0,6.0
+8,22,dag_21,daggr,LSG,0.0,KKR,0.0,---,0.0,SRH,0.0,PBKS,1.0,GT,2.0,LSG,2.0,PBKS,0.0,---,0.0,5.0
+8,22,gamerpradosh,Gamer Pradosh,CSK,1.0,PBKS,1.0,---,0.0,MI,1.0,---,0.0,DC,0.0,LSG,2.0,PBKS,0.0,CSK,0.0,5.0
+8,22,gane_sh,Gane_sh,CSK,1.0,PBKS,1.0,DC,1.0,SRH,0.0,RCB,0.0,---,0.0,LSG,2.0,PBKS,0.0,CSK,0.0,5.0
+8,22,gladiator30,Gladiator,CSK,1.0,PBKS,1.0,RR,0.0,MI,1.0,RCB,0.0,DC,0.0,LSG,2.0,PBKS,0.0,CSK,0.0,5.0
+8,22,gooffyluffyy,Luffy,CSK,1.0,KKR,0.0,DC,1.0,SRH,0.0,PBKS,1.0,DC,0.0,LSG,2.0,PBKS,0.0,CSK,0.0,5.0
+8,22,insane_dwane,Insane_Dwane,CSK,1.0,KKR,0.0,RR,0.0,SRH,0.0,RCB,0.0,GT,2.0,RR,0.0,RCB,2.0,---,0.0,5.0
+8,22,kakashi019805,Kakashi,,,,,DC,1.0,---,0.0,---,0.0,---,0.0,---,0.0,RCB,2.0,MI,2.0,5.0
+8,22,samarp30,Samarp30,CSK,1.0,PBKS,1.0,DC,1.0,SRH,0.0,---,0.0,---,0.0,LSG,2.0,---,0.0,---,0.0,5.0
+9,30,aaryangupta23,Aaryan,,,,,,,,,RCB,0.0,---,0.0,---,0.0,RCB,2.0,MI,2.0,4.0
+9,30,darkwolf_newbie,Darkwolf,LSG,0.0,KKR,0.0,DC,1.0,---,0.0,PBKS,1.0,DC,0.0,LSG,2.0,---,0.0,---,0.0,4.0
+9,30,emptycases,J,LSG,0.0,KKR,0.0,DC,1.0,SRH,0.0,PBKS,1.0,DC,0.0,RR,0.0,PBKS,0.0,MI,2.0,4.0
+9,30,harish_datta_,Harish_datta_,CSK,1.0,KKR,0.0,---,0.0,---,0.0,PBKS,1.0,GT,2.0,RR,0.0,---,0.0,---,0.0,4.0
+9,30,hungry_wolf,HungrY_WolF,LSG,0.0,PBKS,1.0,RR,0.0,SRH,0.0,PBKS,1.0,DC,0.0,LSG,2.0,PBKS,0.0,CSK,0.0,4.0
+9,30,levi_taicho,levi_taicho,,,,,,,,,,,,,,,RCB,2.0,MI,2.0,4.0
+10,36,reflekt_11,Reflekt,LSG,0.0,PBKS,1.0,DC,1.0,MI,1.0,RCB,0.0,DC,0.0,RR,0.0,PBKS,0.0,CSK,0.0,3.0
+10,36,roguehunter15,RogueHunter,LSG,0.0,KKR,0.0,DC,1.0,SRH,0.0,RCB,0.0,DC,0.0,LSG,2.0,PBKS,0.0,CSK,0.0,3.0
+11,38,csharp21,CSharp,LSG,0.0,KKR,0.0,DC,1.0,SRH,0.0,PBKS,1.0,---,0.0,---,0.0,PBKS,0.0,CSK,0.0,2.0
+11,38,deadshot06.,,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,RCB,2.0,---,0.0,2.0
+11,38,eldiablo1701,El Diablo,,,,,DC,1.0,MI,1.0,---,0.0,---,0.0,---,0.0,---,0.0,CSK,0.0,2.0
+11,38,light083969,Light,,,,,,,,,,,,,,,RCB,2.0,---,0.0,2.0
+11,38,mightyprem,Mighty Prem,,,,,,,,,,,,,,,,,MI,2.0,2.0
+11,38,singh84,Singh,CSK,1.0,---,0.0,DC,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,2.0
+11,38,sriprakash,Sri Prakash,LSG,0.0,PBKS,1.0,DC,1.0,SRH,0.0,---,0.0,DC,0.0,---,0.0,PBKS,0.0,CSK,0.0,2.0
+12,45,.antiderivative,antiderivative,CSK,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,abdulhuq,,,,,,DC,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,abhilashsp,Abhilash SP,,,,,,,,,PBKS,1.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,albinopanda.,AlbinoPanda,,,,,,,MI,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,ashmrth,Ashmrth,,,,,DC,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,craniaxx_,⑉¢͢͢͢尺αηιαχ⑉,,,,,,,MI,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,gandalf_the_wizard,,CSK,1.0,KKR,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,garageembark,DEFALT,CSK,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,lelouch1806,lelouch,,,,,DC,1.0,---,0.0,RCB,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,max._.caulfield,Max,LSG,0.0,KKR,0.0,DC,1.0,---,0.0,RCB,0.0,DC,0.0,RR,0.0,---,0.0,---,0.0,1.0
+12,45,pkmkb6011,Sunny Paaji,CSK,1.0,---,0.0,---,0.0,---,0.0,RCB,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,soul_999.,SOUL_999,,,PBKS,1.0,RR,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+12,45,theflash5512,The Flash,CSK,1.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,1.0
+13,58,_simplet0n,ZePHyR,,,,,,,,,RCB,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,aakashmangla,Babu Bhaiya,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,cdgamers14,cdgamers😎,LSG,0.0,KKR,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,fenil_fez,fenil_fez,,,,,,,,,,,,,,,,,CSK,0.0,0.0
+13,58,hg2.0.,HG 2.0,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,izzaanaaaa,izaanaaaa,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,jeki4318,Jeki,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,jerry0_o,Jerry0_0,,,,,,,,,RCB,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,jhalayashraj,jhalayashraj,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,madhavm14,maddy,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,nullpixel96,Nullpixel96,,,,,RR,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,raj_kar,Raj,LSG,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,---,0.0,0.0
+13,58,theredscorpio,HOMELANDER,,,,,,,,,,,,,,,PBKS,0.0,---,0.0,0.0
