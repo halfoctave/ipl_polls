@@ -4,7 +4,7 @@ import json
 from collections import defaultdict
 
 # Set the current week up to which the leaderboard will be generated (e.g., "week1")
-WEEK = "week4"
+WEEK = "week5"
 
 # Flag to control whether playoff points are included
 INCLUDE_PLAYOFFS = False

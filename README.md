@@ -57,7 +57,7 @@ ipl_polls/
 │   │   ├── ranks_overall_week1.json
 │   │   ├── ranks_overall_week2.json
 │   │   └── ranks_overall_week3.json
-├── ipl_polls/
+├── scripts/
 │   ├── 1-generate_match_results.py
 │   ├── 2-generate_weekly_leaderboard.py
 │   ├── 3-generate_overall_leaderboard.py
@@ -69,7 +69,7 @@ ipl_polls/
 - **data/raw/**: Contains input JSON poll files (match polls in `weekN/` subfolders, playoff poll as `playoff_predictions.json`).
 - **data/processed/**: Stores processed CSV outputs (match CSVs in `weekN/`, playoff CSV as `playoff_predictions.csv`).
 - **results/**: Holds leaderboard CSVs (`weekly/`, `overall/`, `detailed/`) and rank JSONs (`ranks/`).
-- **ipl_polls/**: Contains Python scripts and a `logs/` folder (optional, for future logging).
+- **scripts/**: Contains Python scripts ~~and a `logs/` folder (optional, for future logging)~~.
 - **README.md**: This file.
 
 ## Scripts
@@ -156,7 +156,7 @@ Run the scripts in sequence to process polls and generate leaderboards. Update t
 1. **Process Match Polls**:
 
    ```bash
-   cd ipl_polls
+   cd scripts
    python 1-generate_match_results.py
    ```
 
@@ -354,7 +354,7 @@ Contributions are welcome! To contribute:
 
 Ideas for contributions:
 
-- Add logging to `ipl_polls/logs/` for debugging.
+- Add logging to `scripts/logs/` for debugging.
 - Support additional poll types (e.g., player performance predictions).
 - Enhance error handling or input validation.
 - Create a CLI interface for easier script execution.

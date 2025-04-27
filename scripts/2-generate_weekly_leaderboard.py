@@ -3,7 +3,7 @@ import csv
 from collections import defaultdict
 
 # Set the current week to process (e.g., "week1")
-WEEK = "week4"
+WEEK = "week5"
 
 def calculate_ranks(leaderboard, points_key='Total_Points'):
     """
