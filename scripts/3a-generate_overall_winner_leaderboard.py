@@ -4,7 +4,7 @@ import json
 from collections import defaultdict
 
 # Set the current week up to which the leaderboard will be generated (e.g., "week1")
-WEEK = "week5"
+WEEK = "week6"
 
 # Flag to control whether playoff points are included
 INCLUDE_PLAYOFFS = False
@@ -89,14 +89,14 @@ def generate_leaderboard():
         str: Path to the generated leaderboard CSV file
     """
     base_dir = os.path.dirname(__file__)
-    input_dir = os.path.abspath(os.path.join(base_dir, "../results/weekly"))
+    input_dir = os.path.abspath(os.path.join(base_dir, "../results/weekly/poll_winner"))
     playoff_input_dir = os.path.abspath(os.path.join(base_dir, "../data/processed"))
-    output_dir = os.path.abspath(os.path.join(base_dir, "../results/overall"))
-    ranks_dir = os.path.abspath(os.path.join(base_dir, "../results/ranks"))
+    output_dir = os.path.abspath(os.path.join(base_dir, "../results/overall/poll_winner"))
+    ranks_dir = os.path.abspath(os.path.join(base_dir, "../results/ranks/poll_winner"))
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(ranks_dir, exist_ok=True)
 
-    output_file = os.path.join(output_dir, f"overall_{WEEK}{'_with_playoffs' if INCLUDE_PLAYOFFS else ''}.csv")
+    output_file = os.path.join(output_dir, f"week{WEEK.replace('week', '')}{'_with_playoffs' if INCLUDE_PLAYOFFS else ''}.csv")
 
     if not os.path.exists(input_dir):
         print(f"Error: Weekly input directory '{input_dir}' does not exist")
@@ -104,7 +104,7 @@ def generate_leaderboard():
 
     # Load previous week's ranks
     prev_week_num = get_numeric_week(WEEK) - 1
-    prev_ranks_file = os.path.join(ranks_dir, f"ranks_overall_week{prev_week_num}.json")
+    prev_ranks_file = os.path.join(ranks_dir, f"week{prev_week_num}.json")
     prev_ranks = {}
     if os.path.exists(prev_ranks_file):
         try:
@@ -192,7 +192,7 @@ def generate_leaderboard():
             'standard': entry['Standard Rank']
         } for entry in leaderboard_list
     }
-    with open(os.path.join(ranks_dir, f"ranks_overall_{WEEK}.json"), 'w', encoding='utf-8') as f:
+    with open(os.path.join(ranks_dir, f"week{WEEK.replace('week', '')}.json"), 'w', encoding='utf-8') as f:
         json.dump(current_ranks, f, ensure_ascii=False)
 
     fieldnames = ['Dense Rank', 'Dense Rank Movement', 'Standard Rank', 'Standard Rank Movement',

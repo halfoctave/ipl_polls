@@ -3,7 +3,7 @@ import csv
 import os
 
 # Set the current week to process (e.g., "week1")
-WEEK = "week5"
+WEEK = "week6"
 
 # Dictionary mapping full team names to their short abbreviations
 SHORT_NAMES = {
@@ -81,11 +81,11 @@ def process_poll_to_csv(json_data, output_file):
 def main():
     """
     Process all JSON poll files for the specified week, converting them to CSV files.
-    Reads from data/raw/weekX and saves to data/processed/weekX.
+    Reads from data/raw/weekX/poll_winner and saves to data/processed/weekX/poll_winner.
     """
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    input_dir = os.path.join(script_dir, '..', 'data', 'raw', WEEK)
-    output_dir = os.path.join(script_dir, '..', 'data', 'processed', WEEK)
+    input_dir = os.path.join(script_dir, '..', 'data', 'raw', WEEK, 'poll_winner')
+    output_dir = os.path.join(script_dir, '..', 'data', 'processed', WEEK, 'poll_winner')
 
     if not os.path.exists(input_dir):
         print(f"Error: Input directory '{input_dir}' does not exist")

@@ -1,9 +1,9 @@
-import csv
 import os
+import csv
 from collections import defaultdict
 
 # Set the current week up to which the leaderboard will be generated (e.g., "week1")
-WEEK = "week5"
+WEEK = "week6"
 
 def calculate_ranks(leaderboard, points_key='Total_Points'):
     """
@@ -39,15 +39,22 @@ def calculate_ranks(leaderboard, points_key='Total_Points'):
 
 def generate_detailed_leaderboard():
     """
-    Generate a detailed leaderboard CSV combining all matches up to the specified week.
+    Generate a detailed leaderboard CSV combining winner poll matches up to the specified week.
     Includes per-match team selections and points.
     
     Returns:
         str: Path to the generated leaderboard CSV file
     """
-    week_num = int(WEEK.replace("week", ""))
+    try:
+        week_num = int(WEEK.replace("week", ""))
+    except ValueError:
+        print(f"Error: Invalid week string '{WEEK}'")
+        return None
+
     base_dir = os.path.dirname(__file__)
-    input_dir = os.path.abspath(os.path.join(base_dir, '../results/weekly'))
+    input_dir = os.path.abspath(os.path.join(base_dir, '../results/weekly/poll_winner'))
+    output_dir = os.path.abspath(os.path.join(base_dir, '../results/detailed/poll_winner'))
+    output_file = os.path.join(output_dir, f'week{week_num}.csv')
 
     if not os.path.exists(input_dir):
         print(f"Error: Input directory '{input_dir}' does not exist")
@@ -120,10 +127,7 @@ def generate_detailed_leaderboard():
     leaderboard_list.sort(key=lambda x: (-x['Total_Points'], x['Username']))
     leaderboard_list = calculate_ranks(leaderboard_list, 'Total_Points')
 
-    output_dir = os.path.join(base_dir, '..', 'results', 'detailed')
-    output_file = os.path.join(output_dir, f'detailed_{WEEK}.csv')
     os.makedirs(output_dir, exist_ok=True)
-
     headers = ['Dense Rank', 'Standard Rank', 'Username', 'Display Name']
     for i in range(1, max_matches + 1):
         headers.extend([f'Match_{i}_Team_Short', f'Match_{i}_Points'])
@@ -147,11 +151,11 @@ def generate_detailed_leaderboard():
                 row[f'Match_{i}_Points'] = match['Points']
             writer.writerow(row)
 
-    print(f"Detailed leaderboard created: {output_file}")
+    print(f"Detailed winner poll leaderboard created: {output_file}")
     print(f"Processed {len(week_files)} weeks, {max_matches} matches, {len(combined_data)} users")
     return output_file
 
 if __name__ == "__main__":
     output_file = generate_detailed_leaderboard()
     if output_file:
-        print(f"Detailed leaderboard generation completed for {WEEK}")
+        print(f"Detailed winner poll leaderboard generation completed for {WEEK}")
