@@ -1,14 +1,14 @@
 # IPL Polls Leaderboard Generator
 
-The **IPL Polls Leaderboard Generator** is a Python-based toolset for processing Indian Premier League (IPL) poll data and generating leaderboards. It processes match and playoff prediction polls, calculates points based on user votes, and produces detailed, weekly, and overall leaderboards in CSV format. The project is designed for IPL organizers, fans, or communities running prediction polls to track user performance across matches and seasons.
+The **IPL Polls Leaderboard Generator** is a Python-based toolset for processing Indian Premier League (IPL) poll data and generating leaderboards. These scripts are primarily written for a contest held at Indian Console Gamers (ICG) Discord server using the EasyPoll Disord bot. It handles two type of polls i.e. predict the winner and predict the winning margin prediction polls for matches, as well as playoff team predictions. 
 
 ## Features
 
-- **Match Poll Processing**: Converts per-match JSON polls into CSVs with user votes and points.
+- **Match Poll Processing**: Converts per-match JSON polls into CSVs with user votes and points for both winner and margin predictions.
 - **Playoff Poll Processing**: Evaluates playoff team predictions, awarding points for correct picks.
-- **Weekly Leaderboards**: Combines match results for a given week into a single CSV with user rankings.
-- **Overall Leaderboards**: Aggregates points across weeks, optionally including playoff points, with rank movement tracking.
-- **Detailed Leaderboards**: Provides per-match team selections and points for each user.
+- **Weekly Leaderboards**: Combines match results for a given week into a single CSV with user rankings for winner and margin polls.
+- **Overall Leaderboards**: Aggregates points across weeks, optionally including playoff points, with rank movement tracking for winner, margin, and combined polls.
+- **Detailed Leaderboards**: Provides per-match team selections and points for each user for winner and margin polls.
 - **Excel Compatibility**: Outputs CSVs with UTF-8-SIG encoding to ensure special characters (e.g., accented names, emojis) display correctly in Microsoft Excel.
 - **Ranking System**: Supports `Dense Rank` (no skips, e.g., 1, 2, 2, 3) and `Standard Rank` (with skips, e.g., 1, 2, 2, 4).
 
@@ -26,95 +26,148 @@ ipl_polls/
 ├── data/
 │   ├── raw/
 │   │   ├── week1/
-│   │   │   ├── 1-MIvsRR.json
-│   │   │   ├── 2-CSKvsKKR.json
-│   │   │   └── ...
+│   │   │   ├── poll_winner/
+│   │   │   │   └── 06-20250326_RRvsKKR.json
+│   │   │   │   └── 07-20250327_SRHvsLSG.json
+│   │   │   ├── poll_margin/
+│   │   │   │   └── 06-20250326_RRvsKKR.json
+│   │   │   │   └── 07-20250327_SRHvsLSG.json
 │   │   ├── week2/
 │   │   ├── week3/
 │   │   └── playoff_predictions.json
 │   ├── processed/
 │   │   ├── week1/
-│   │   │   ├── 1-MIvsRR.csv
-│   │   │   ├── 2-CSKvsKKR.csv
-│   │   │   └── ...
+│   │   │   ├── poll_winner/
+│   │   │   │   └── 06-20250326_RRvsKKR.csv
+│   │   │   │   └── 07-20250327_SRHvsLSG.csv
+│   │   │   ├── poll_margin/
+│   │   │   │   └── 06-20250326_RRvsKKR.csv
+│   │   │   │   └── 07-20250327_SRHvsLSG.csv
 │   │   ├── week2/
 │   │   ├── week3/
 │   │   └── playoff_predictions.csv
 ├── results/
 │   ├── weekly/
-│   │   ├── week1.csv
-│   │   ├── week2.csv
-│   │   └── week3.csv
+│   │   ├── poll_winner/
+│   │   │   └── week1.csv
+│   │   ├── poll_margin/
+│   │   │   └── week1.csv
 │   ├── overall/
-│   │   ├── overall_week1.csv
-│   │   ├── overall_week2.csv
-│   │   └── overall_week3.csv
+│   │   ├── poll_winner/
+│   │   │   └── week1.csv
+│   │   ├── poll_margin/
+│   │   │   └── week1.csv
+│   │   ├── combined/
+│   │   │   └── week1.csv
 │   ├── detailed/
-│   │   ├── detailed_week1.csv
-│   │   ├── detailed_week2.csv
-│   │   └── detailed_week3.csv
+│   │   ├── poll_winner/
+│   │   │   └── week1.csv
+│   │   ├── poll_margin/
+│   │   │   └── week1.csv
 │   ├── ranks/
-│   │   ├── ranks_overall_week1.json
-│   │   ├── ranks_overall_week2.json
-│   │   └── ranks_overall_week3.json
+│   │   ├── poll_winner/
+│   │   │   └── week1.json
+│   │   ├── poll_margin/
+│   │   │   └── week1.json
+│   │   ├── combined/
+│   │   │   └── week1.json
 ├── scripts/
-│   ├── 1-generate_match_results.py
-│   ├── 2-generate_weekly_leaderboard.py
-│   ├── 3-generate_overall_leaderboard.py
-│   ├── 4-generate_detailed_leaderboard.py
-│   ├── 5-generate_playoff_results.py
+│   ├── 1a-generate_winner_results.py
+│   ├── 1b-generate_margin_results.py
+│   ├── 2a-generate_weekly_winner_leaderboard.py
+│   ├── 2b-generate_weekly_margin_leaderboard.py
+│   ├── 3a-generate_overall_winner_leaderboard.py
+│   ├── 3b-generate_overall_margin_leaderboard.py
+│   ├── 4-generate_overall_leaderboard.py
+│   ├── 5a-generate_detailed_winner_leaderboard.py
+│   ├── 5b-generate_detailed_margin_leaderboard.py
+│   └── 6-generate_playoff_results.py
 └── README.md
 ```
 
-- **data/raw/**: Contains input JSON poll files (match polls in `weekN/` subfolders, playoff poll as `playoff_predictions.json`).
-- **data/processed/**: Stores processed CSV outputs (match CSVs in `weekN/`, playoff CSV as `playoff_predictions.csv`).
+- **data/raw/**: Contains input JSON poll files (match polls in `weekN/poll_winner/` and `weekN/poll_margin/`, playoff poll as `playoff_predictions.json`).
+- **data/processed/**: Stores processed CSV outputs (match CSVs in `weekN/poll_winner/` and `weekN/poll_margin/`, playoff CSV as `playoff_predictions.csv`).
 - **results/**: Holds leaderboard CSVs (`weekly/`, `overall/`, `detailed/`) and rank JSONs (`ranks/`).
-- **scripts/**: Contains Python scripts ~~and a `logs/` folder (optional, for future logging)~~.
-- **README.md**: This file.
+- **scripts/**: Contains Python scripts for processing and generating leaderboards.
 
 ## Scripts
 
-The project includes five Python scripts, each with a specific role:
+The project includes the following Python scripts, each with a specific role:
 
-1. `1-generate_match_results.py`
+1. **`1a-generate_winner_results.py`** (Artifact ID: `a1b2c3d4-e5f6-7890-abcd-ef1234567890`)
 
-   - **Purpose**: Processes per-match JSON poll files for a given week, converting them to CSVs with user votes, team selections, and points.
-   - **Input**: JSON files in `data/raw/weekN/` (e.g., `1-MIvsRR.json`).
-   - **Output**: CSVs in `data/processed/weekN/` (e.g., `1-MIvsRR.csv`).
+   - **Purpose**: Processes JSON poll files for winner predictions and generates CSV files with user votes and points.
+   - **Input**: JSON files in `data/raw/weekN/poll_winner/` (e.g., `1-MIvsRR.json`).
+   - **Output**: CSVs in `data/processed/weekN/poll_winner/` (e.g., `1-MIvsRR.csv`).
    - **Key Features**: Assigns custom points based on the match winner, uses short team names (e.g., `MI`, `RR`).
 
-2. `2-generate_weekly_leaderboard.py`
+2. **`1b-generate_margin_results.py`** (Artifact ID: `b2c3d4e5-f678-9012-bcde-f12345678901`)
 
-   - **Purpose**: Combines match CSVs for a week into a single leaderboard CSV, including per-match team selections, points, and rankings.
-   - **Input**: CSVs in `data/processed/weekN/`.
-   - **Output**: CSV in `results/weekly/weekN.csv`.
+   - **Purpose**: Processes JSON poll files for margin predictions and generates CSV files with user votes and points.
+   - **Input**: JSON files in `data/raw/weekN/poll_margin/` (e.g., `1-MIvsRR.json`).
+   - **Output**: CSVs in `data/processed/weekN/poll_margin/` (e.g., `1-MIvsRR.csv`).
+   - **Key Features**: Parses margin ranges, assigns points based on the correct margin prediction.
+
+3. **`2a-generate_weekly_winner_leaderboard.py`** (Artifact ID: `c3d4e5f6-7890-1234-cdef-123456789012`)
+
+   - **Purpose**: Combines weekly winner poll CSV files into a single leaderboard CSV, calculating ranks.
+   - **Input**: CSVs in `data/processed/weekN/poll_winner/`.
+   - **Output**: CSV in `results/weekly/poll_winner/weekN.csv`.
    - **Key Features**: Adds `Dense Rank` and `Standard Rank`, handles missing votes with `---`.
 
-3. `3-generate_overall_leaderboard.py`
+4. **`2b-generate_weekly_margin_leaderboard.py`** (Artifact ID: `d4e5f6c7-8901-2345-def0-234567890123`)
 
-   - **Purpose**: Aggregates points across weeks (optionally including playoffs) into an overall leaderboard with rank movement.
-   - **Input**: CSVs in `results/weekly/`, optionally `data/processed/playoff_predictions.csv`, previous ranks in `results/ranks/`.
-   - **Output**: CSV in `results/overall/overall_weekN.csv`, JSON in `results/ranks/ranks_overall_weekN.json`.
+   - **Purpose**: Combines weekly margin poll CSV files into a single leaderboard CSV, calculating ranks.
+   - **Input**: CSVs in `data/processed/weekN/poll_margin/`.
+   - **Output**: CSV in `results/weekly/poll_margin/weekN.csv`.
+   - **Key Features**: Adds `Dense Rank` and `Standard Rank`, handles missing votes with `---`.
+
+5. **`3a-generate_overall_winner_leaderboard.py`** (Artifact ID: `e5f6c7d8-9012-3456-ef01-345678901234`)
+
+   - **Purpose**: Generates an overall leaderboard from weekly winner leaderboards, including ranks and movement.
+   - **Input**: CSVs in `results/weekly/poll_winner/`, optionally `data/processed/playoff_predictions.csv`, previous ranks in `results/ranks/poll_winner/`.
+   - **Output**: CSV in `results/overall/poll_winner/weekN.csv`, JSON in `results/ranks/poll_winner/weekN.json`.
    - **Key Features**: Tracks `Dense Rank Movement` and `Standard Rank Movement` (e.g., `↑2`, `↓1`, `—`, `N`).
 
-4. `4-generate_detailed_leaderboard.py`
+6. **`3b-generate_overall_margin_leaderboard.py`** (Artifact ID: `f6c7d8e9-0123-4567-f012-456789012345`)
 
-   - **Purpose**: Creates a detailed leaderboard with per-match team selections and points across all weeks.
-   - **Input**: CSVs in `results/weekly/`.
-   - **Output**: CSV in `results/detailed/detailed_weekN.csv`.
+   - **Purpose**: Generates an overall leaderboard from weekly margin leaderboards, including ranks and movement.
+   - **Input**: CSVs in `results/weekly/poll_margin/`, optionally `data/processed/playoff_predictions.csv`, previous ranks in `results/ranks/poll_margin/`.
+   - **Output**: CSV in `results/overall/poll_margin/weekN.csv`, JSON in `results/ranks/poll_margin/weekN.json`.
+   - **Key Features**: Tracks `Dense Rank Movement` and `Standard Rank Movement` (e.g., `↑2`, `↓1`, `—`, `N`).
+
+7. **`4-generate_overall_leaderboard.py`** (Artifact ID: `c7d8e9f0-1234-5678-0123-567890123456`)
+
+   - **Purpose**: Generates a combined overall leaderboard from overall winner and margin leaderboards.
+   - **Input**: CSVs in `results/overall/poll_winner/` and `results/overall/poll_margin/`.
+   - **Output**: CSV in `results/overall/combined/weekN.csv`, JSON in `results/ranks/combined/weekN.json`.
+   - **Key Features**: Combines points from winner and margin polls, calculates combined ranks and movement.
+
+8. **`5a-generate_detailed_winner_leaderboard.py`** (Artifact ID: `d8e9f0c1-2345-6789-1234-678901234567`)
+
+   - **Purpose**: Generates a detailed leaderboard for winner polls, including per-match selections.
+   - **Input**: CSVs in `results/weekly/poll_winner/`.
+   - **Output**: CSV in `results/detailed/poll_winner/weekN.csv`.
    - **Key Features**: Lists every match’s team and points for each user, with `Dense Rank` and `Standard Rank`.
 
-5. `5-generate_playoff_results.py`
+9. **`5b-generate_detailed_margin_leaderboard.py`** (Artifact ID: `e9f0c1d2-3456-7890-2345-789012345678`)
 
-   - **Purpose**: Processes playoff prediction polls, awarding points for correct team picks.
-   - **Input**: JSON in `data/raw/playoff_predictions.json`.
-   - **Output**: CSV in `data/processed/playoff_predictions.csv`.
-   - **Key Features**: Handles multiple votes per user (4 teams), calculates points for correct picks, includes rankings.
+   - **Purpose**: Generates a detailed leaderboard for margin polls, including per-match selections.
+   - **Input**: CSVs in `results/weekly/poll_margin/`.
+   - **Output**: CSV in `results/detailed/poll_margin/weekN.csv`.
+   - **Key Features**: Lists every match’s margin and points for each user, with `Dense Rank` and `Standard Rank`.
+
+10. **`6-generate_playoff_results.py`** (Artifact ID: `f0c1d2e3-4567-8901-3456-890123456789`)
+
+    - **Purpose**: Processes playoff prediction polls and generates a CSV with results and ranks.
+    - **Input**: JSON in `data/raw/playoff_predictions.json`.
+    - **Output**: CSV in `data/processed/playoff_predictions.csv`.
+    - **Key Features**: Handles multiple votes per user (4 teams), calculates points for correct picks, includes rankings.
 
 ## Prerequisites
 
 - **Python**: Version 3.8 or higher.
-- **Dependencies**: Standard library modules only (`json`, `csv`, `os`, `collections`).
+- **Dependencies**: Standard library modules only (`json`, `csv`, `os`, `collections`, `re`).
 - **Operating System**: Windows, macOS, or Linux.
 - **Tools**: Git for cloning the repository, a text editor (e.g., VS Code) for modifications.
 
@@ -141,7 +194,7 @@ The project includes five Python scripts, each with a specific role:
 
 3. **Prepare Input Data**:
 
-   - Place match poll JSON files in `data/raw/weekN/` (e.g., `data/raw/week3/1-MIvsRR.json`).
+   - Place match poll JSON files in `data/raw/weekN/poll_winner/` and `data/raw/weekN/poll_margin/` (e.g., `data/raw/week3/poll_winner/1-MIvsRR.json`).
    - Place playoff poll JSON in `data/raw/playoff_predictions.json`.
    - See Input File Formats for JSON structure.
 
@@ -153,62 +206,104 @@ The project includes five Python scripts, each with a specific role:
 
 Run the scripts in sequence to process polls and generate leaderboards. Update the `WEEK` variable in each script (e.g., `WEEK = "week3"`) to match the target week.
 
-1. **Process Match Polls**:
+1. **Process Winner Match Polls**:
 
    ```bash
    cd scripts
-   python 1-generate_match_results.py
+   python 1a-generate_winner_results.py
    ```
 
-   - Processes all JSONs in `data/raw/week3/` into CSVs in `data/processed/week3/`.
+   - Processes all JSONs in `data/raw/week3/poll_winner/` into CSVs in `data/processed/week3/poll_winner/`.
 
-2. **Generate Weekly Leaderboard**:
+2. **Process Margin Match Polls**:
 
    ```bash
-   python 2-generate_weekly_leaderboard.py
+   python 1b-generate_margin_results.py
    ```
 
-   - Combines CSVs from `data/processed/week3/` into `results/weekly/week3.csv`.
+   - Processes all JSONs in `data/raw/week3/poll_margin/` into CSVs in `data/processed/week3/poll_margin/`.
 
-3. **Generate Overall Leaderboard**:
+3. **Generate Weekly Winner Leaderboard**:
 
    ```bash
-   python 3-generate_overall_leaderboard.py
+   python 2a-generate_weekly_winner_leaderboard.py
    ```
 
-   - Aggregates CSVs from `results/weekly/` into `results/overall/overall_week3.csv`.
+   - Combines CSVs from `data/processed/week3/poll_winner/` into `results/weekly/poll_winner/week3.csv`.
+
+4. **Generate Weekly Margin Leaderboard**:
+
+   ```bash
+   python 2b-generate_weekly_margin_leaderboard.py
+   ```
+
+   - Combines CSVs from `data/processed/week3/poll_margin/` into `results/weekly/poll_margin/week3.csv`.
+
+5. **Generate Overall Winner Leaderboard**:
+
+   ```bash
+   python 3a-generate_overall_winner_leaderboard.py
+   ```
+
+   - Aggregates CSVs from `results/weekly/poll_winner/` into `results/overall/poll_winner/week3.csv`.
    - Set `INCLUDE_PLAYOFFS = True` to include `data/processed/playoff_predictions.csv`.
 
-4. **Generate Detailed Leaderboard**:
+6. **Generate Overall Margin Leaderboard**:
 
    ```bash
-   python 4-generate_detailed_leaderboard.py
+   python 3b-generate_overall_margin_leaderboard.py
    ```
 
-   - Creates `results/detailed/detailed_week3.csv` from `results/weekly/` CSVs.
+   - Aggregates CSVs from `results/weekly/poll_margin/` into `results/overall/poll_margin/week3.csv`.
+   - Set `INCLUDE_PLAYOFFS = True` to include `data/processed/playoff_predictions.csv`.
 
-5. **Process Playoff Poll**:
+7. **Generate Combined Overall Leaderboard**:
 
    ```bash
-   python 5-generate_playoff_results.py
+   python 4-generate_overall_leaderboard.py
    ```
 
-   - Converts `data/raw/playoff_predictions.json` into `data/processed/playoff_predictions.csv`.
+   - Combines `results/overall/poll_winner/week3.csv` and `results/overall/poll_margin/week3.csv` into `results/overall/combined/week3.csv`.
+
+8. **Generate Detailed Winner Leaderboard**:
+
+   ```bash
+   python 5a-generate_detailed_winner_leaderboard.py
+   ```
+
+   - Creates `results/detailed/poll_winner/week3.csv` from `results/weekly/poll_winner/`.
+
+9. **Generate Detailed Margin Leaderboard**:
+
+   ```bash
+   python 5b-generate_detailed_margin_leaderboard.py
+   ```
+
+   - Creates `results/detailed/poll_margin/week3.csv` from `results/weekly/poll_margin/`.
+
+10. **Process Playoff Poll**:
+
+    ```bash
+    python 6-generate_playoff_results.py
+    ```
+
+    - Converts `data/raw/playoff_predictions.json` into `data/processed/playoff_predictions.csv`.
 
 ### Example Workflow
 
-Like for IPL week 3:
+For IPL week 3:
 
-1. Place JSONs (e.g., `1-MIvsRR.json`, `2-CSKvsKKR.json`) in `data/raw/week3/`.
-2. Run `1-generate_match_results.py` to create CSVs in `data/processed/week3/`.
-3. Run `2-generate_weekly_leaderboard.py` to create `results/weekly/week3.csv`.
-4. Run `3-generate_overall_leaderboard.py` to create `results/overall/overall_week3.csv`.
-5. Run `4-generate_detailed_leaderboard.py` to create `results/detailed/detailed_week3.csv`.
-6. Place `playoff_predictions.json` in `data/raw/` and run `5-generate_playoff_results.py` to create `data/processed/playoff_predictions.csv`.
+1. Place winner and margin JSONs (e.g., `1-MIvsRR.json`) in `data/raw/week3/poll_winner/` and `data/raw/week3/poll_margin/`.
+2. Run `1a-generate_winner_results.py` and `1b-generate_margin_results.py` to create CSVs in `data/processed/week3/poll_winner/` and `data/processed/week3/poll_margin/`.
+3. Run `2a-generate_weekly_winner_leaderboard.py` and `2b-generate_weekly_margin_leaderboard.py` to create `results/weekly/poll_winner/week3.csv` and `results/weekly/poll_margin/week3.csv`.
+4. Run `3a-generate_overall_winner_leaderboard.py` and `3b-generate_overall_margin_leaderboard.py` to create `results/overall/poll_winner/week3.csv` and `results/overall/poll_margin/week3.csv`.
+5. Run `4-generate_overall_leaderboard.py` to create `results/overall/combined/week3.csv`.
+6. Run `5a-generate_detailed_winner_leaderboard.py` and `5b-generate_detailed_margin_leaderboard.py` to create `results/detailed/poll_winner/week3.csv` and `results/detailed/poll_margin/week3.csv`.
+7. Place `playoff_predictions.json` in `data/raw/` and run `6-generate_playoff_results.py` to create `data/processed/playoff_predictions.csv`.
 
 ## Input File Formats
 
-### Match Poll JSON (`data/raw/weekN/1-MIvsRR.json`)
+### Winner Match Poll JSON (`data/raw/weekN/poll_winner/1-MIvsRR.json`)
 
 ```json
 {
@@ -234,6 +329,34 @@ Like for IPL week 3:
 - `winner`: Short name of the winning team (e.g., `MI`).
 - `points`: Points for correct vote (e.g., `3.0`).
 - `answers`: List of team options (full names).
+- `votes`: List of user votes with `user` details and `answerId`.
+
+### Margin Match Poll JSON (`data/raw/weekN/poll_margin/1-MIvsRR.json`)
+
+```json
+{
+  "margin": "14 runs",
+  "points": 5.0,
+  "answers": [
+    {"id": "1", "name": "Win by 1-10 runs OR by 7-8 wickets"},
+    {"id": "2", "name": "Win by 11-20 runs OR by 9-10 wickets"}
+  ],
+  "votes": [
+    {
+      "user": {"id": "u1", "username": "user1", "globalName": "User One"},
+      "answerId": "1"
+    },
+    {
+      "user": {"id": "u2", "username": "user2", "globalName": "User Two"},
+      "answerId": "2"
+    }
+  ]
+}
+```
+
+- `margin`: Match margin (e.g., `"14 runs"`, `"3 wickets"`).
+- `points`: Points for correct margin prediction (e.g., `5.0`).
+- `answers`: List of margin options (full descriptions).
 - `votes`: List of user votes with `user` details and `answerId`.
 
 ### Playoff Poll JSON (`data/raw/playoff_predictions.json`)
@@ -270,12 +393,20 @@ Like for IPL week 3:
 
 ### CSV Outputs
 
-- **Match CSV** (`data/processed/week3/1-MIvsRR.csv`):
+- **Winner Match CSV** (`data/processed/week3/poll_winner/1-MIvsRR.csv`):
 
   ```
   Username,Display Name,Team Voted Short,Team Voted,Points
   user1,User One,MI,Mumbai Indians,3.0
   user2,User Two,RR,Rajasthan Royals,0.0
+  ```
+
+- **Margin Match CSV** (`data/processed/week3/poll_margin/1-MIvsRR.csv`):
+
+  ```
+  Username,Display Name,Margin Voted Short,Margin Voted,Points
+  user1,User One,1-10R,Win by 1-10 runs OR by 7-8 wickets,0.0
+  user2,User Two,11-20R,Win by 11-20 runs OR by 9-10 wickets,5.0
   ```
 
 - **Playoff CSV** (`data/processed/playoff_predictions.csv`):
@@ -285,21 +416,21 @@ Like for IPL week 3:
   1,1,user1,User One,CSK, KKR, MI, RR,CSK, KKR, MI, RR,16.0
   ```
 
-- **Weekly CSV** (`results/weekly/week3.csv`):
+- **Weekly Winner CSV** (`results/weekly/poll_winner/week3.csv`):
 
   ```
   Dense Rank,Standard Rank,Username,Display Name,Match_1_Team_Short,Match_1_Points,...,Total_Points
   1,1,user1,User One,MI,3.0,...,6.0
   ```
 
-- **Overall CSV** (`results/overall/overall_week3.csv`):
+- **Overall Winner CSV** (`results/overall/poll_winner/week3.csv`):
 
   ```
   Dense Rank,Dense Rank Movement,Standard Rank,Standard Rank Movement,Username,Display Name,Week1,Week2,Week3,Total
   1,—,1,—,user1,User One,5.0,4.0,6.0,15.0
   ```
 
-- **Detailed CSV** (`results/detailed/detailed_week3.csv`):
+- **Detailed Winner CSV** (`results/detailed/poll_winner/week3.csv`):
 
   ```
   Dense Rank,Standard Rank,Username,Display Name,Match_1_Team_Short,Match_1_Points,...,Total_Points
@@ -314,13 +445,13 @@ Like for IPL week 3:
 ## Troubleshooting
 
 - **Error: "Input directory does not exist"**:
-  - Ensure `data/raw/weekN/` exists and contains JSON files.
+  - Ensure `data/raw/weekN/poll_winner/` and `data/raw/weekN/poll_margin/` exist and contain JSON files.
   - Verify `WEEK` variable matches the folder (e.g., `week3`).
 - **Error: "Invalid JSON"**:
   - Check JSON files for correct syntax (e.g., missing commas, brackets).
   - Use a JSON validator (e.g., VS Code, online tools).
 - **Special Characters Garbled in Excel**:
-  - Confirm CSVs are opened in Excel with UTF-8 encoding (File &gt; Open &gt; Text Import Wizard &gt; UTF-8).
+  - Confirm CSVs are opened in Excel with UTF-8 encoding (File > Open > Text Import Wizard > UTF-8).
   - All CSVs are written with `UTF-8-SIG`, so this should be rare.
 - **Missing Output Files**:
   - Ensure input files are present and scripts are run in order (match, weekly, overall, detailed, playoff).
@@ -331,29 +462,21 @@ Like for IPL week 3:
 Contributions are welcome! To contribute:
 
 1. Fork the repository on GitHub or GitLab.
-
 2. Create a branch for your changes:
-
    ```bash
    git checkout -b feature/your-feature
    ```
-
 3. Make changes, test thoroughly, and commit:
-
    ```bash
    git commit -m "Add your feature"
    ```
-
 4. Push to your fork and create a pull request:
-
    ```bash
    git push origin feature/your-feature
    ```
-
 5. Ensure your code follows Python PEP 8 style guidelines and includes tests if applicable.
 
 Ideas for contributions:
-
 - Add logging to `scripts/logs/` for debugging.
 - Support additional poll types (e.g., player performance predictions).
 - Enhance error handling or input validation.
