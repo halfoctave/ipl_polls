@@ -501,7 +501,21 @@
         "banner": null
       },
       "createdAt": "2025-04-28T12:25:22.167Z"
-    }
+    },
+    {
+      "id": "6fc4c99f-bc3d-4268-986f-735b6e3a3f84",
+      "answerId": "19398970-bc24-4fc5-9de3-ca0b5fb85dae",
+      "weight": 1,
+      "user": {
+        "id": "702737036817334303",
+        "username": "vahgar",
+        "discriminator": "0",
+        "globalName": "Allen The Alien",
+        "avatar": "69afb2f599e6fef069f02746857ff638",
+        "banner": null
+      },
+      "createdAt": "2025-04-28T12:26:12.000Z"
+    }    
   ],
   "allowedRoles": []
 }

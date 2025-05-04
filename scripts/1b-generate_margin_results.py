@@ -8,16 +8,19 @@ WEEK = "week6"
 
 def parse_margin(margin_str):
     """
-    Parse the margin string into number and unit (runs or wickets).
+    Parse the margin string into number and unit (runs, wickets, or Super Over).
     
     Args:
-        margin_str (str): Margin string, e.g., "14 runs", "3 wickets"
+        margin_str (str): Margin string, e.g., "14 runs", "3 wickets", "Super Over"
     Returns:
-        tuple: (number, unit) where number is int or None, unit is "runs" or "wickets"
+        tuple: (number, unit) where number is int or None, unit is "runs", "wickets", or "super_over"
     """
     if not margin_str or not isinstance(margin_str, str):
         return None, None
-    match = re.match(r"(\d+)\s*(runs|wickets)", margin_str.lower().strip())
+    margin_str = margin_str.lower().strip()
+    if margin_str == "super over":
+        return None, "super_over"
+    match = re.match(r"(\d+)\s*(runs|wickets)", margin_str)
     if not match:
         return None, None
     number = int(match.group(1))
@@ -26,23 +29,32 @@ def parse_margin(margin_str):
 
 def parse_answer_range(answer_name, margin_unit):
     """
-    Parse an answer's name to extract run or wicket ranges, using the margin unit to determine short name.
+    Parse an answer's name to extract run, wicket, or Super Over options, using the margin unit to determine short name.
     
     Args:
-        answer_name (str): Answer name, e.g., "Win by 11-20 runs OR by 9-10 wickets"
-        margin_unit (str): "runs" or "wickets" from the margin field
+        answer_name (str): Answer name, e.g., "Win by 11-20 runs OR by 9-10 wickets", "Win by Super Over"
+        margin_unit (str): "runs", "wickets", or "super_over" from the margin field
     Returns:
-        tuple: (run_min, run_max, wicket_min, wicket_max, short_name)
+        tuple: (run_min, run_max, wicket_min, wicket_max, is_super_over, short_name)
                run_max/wicket_max is None for open-ended or single values
-               short_name is abbreviated form (e.g., "11-20R" or "1W")
+               is_super_over is True if the answer is for Super Over
+               short_name is abbreviated form (e.g., "11-20R", "1W", "SO")
     """
     run_min = run_max = wicket_min = wicket_max = None
+    is_super_over = False
     short_name = "Unknown"
     
+    answer_name_lower = answer_name.lower()
+    
+    # Match Super Over
+    if "super over" in answer_name_lower:
+        is_super_over = True
+        short_name = "SO"
+    
     # Match run ranges: XX-XX runs, XX+ runs, or XX runs
-    run_match = re.search(r"(\d+)(?:-(\d+)|[+])?\s*runs?", answer_name.lower())
+    run_match = re.search(r"(\d+)(?:-(\d+)|[+])?\s*runs?", answer_name_lower)
     # Match wicket ranges: X-X wickets, X+ wickets, X wicket(s)
-    wicket_match = re.search(r"(\d+)(?:-(\d+)|[+])?\s*wicket(?:s)?", answer_name.lower())
+    wicket_match = re.search(r"(\d+)(?:-(\d+)|[+])?\s*wicket(?:s)?", answer_name_lower)
     
     if run_match:
         run_min = int(run_match.group(1))
@@ -53,36 +65,40 @@ def parse_answer_range(answer_name, margin_unit):
         wicket_max = int(wicket_match.group(2)) if wicket_match.group(2) else None
     
     # Set short_name based on margin_unit
-    if margin_unit == "runs" and run_min is not None:
-        if run_max is not None:
-            short_name = f"{run_min}-{run_max}R"
-        elif run_match.group(0).endswith("+ runs"):
-            short_name = f"{run_min}+R"
-        else:
-            short_name = f"{run_min}R"
-    elif margin_unit == "wickets" and wicket_min is not None:
-        if wicket_max is not None:
-            short_name = f"{wicket_min}-{wicket_max}W"
-        elif wicket_match.group(0).endswith("+ wickets"):
-            short_name = f"{wicket_min}+W"
-        else:
-            short_name = f"{wicket_min}W"
+    if not is_super_over:
+        if margin_unit == "runs" and run_min is not None:
+            if run_max is not None:
+                short_name = f"{run_min}-{run_max}R"
+            elif run_match.group(0).endswith("+ runs"):
+                short_name = f"{run_min}+R"
+            else:
+                short_name = f"{run_min}R"
+        elif margin_unit == "wickets" and wicket_min is not None:
+            if wicket_max is not None:
+                short_name = f"{wicket_min}-{wicket_max}W"
+            elif wicket_match.group(0).endswith("+ wickets"):
+                short_name = f"{wicket_min}+W"
+            else:
+                short_name = f"{wicket_min}W"
     
-    return run_min, run_max, wicket_min, wicket_max, short_name
+    return run_min, run_max, wicket_min, wicket_max, is_super_over, short_name
 
 def find_winning_answer(margin_number, margin_unit, answers):
     """
-    Find the answer whose range matches the margin.
+    Find the answer whose range or option matches the margin.
     
     Args:
-        margin_number (int): Margin value, e.g., 14
-        margin_unit (str): "runs" or "wickets"
+        margin_number (int): Margin value, e.g., 14, None for Super Over
+        margin_unit (str): "runs", "wickets", or "super_over"
         answers (list): List of answer dicts with 'id', 'name'
     Returns:
         dict: Winning answer dict or None if no match
     """
     for answer in answers:
-        run_min, run_max, wicket_min, wicket_max, _ = parse_answer_range(answer['name'], margin_unit)
+        run_min, run_max, wicket_min, wicket_max, is_super_over, _ = parse_answer_range(answer['name'], margin_unit)
+        
+        if margin_unit == "super_over" and is_super_over:
+            return answer
         
         if margin_unit == "runs" and run_min is not None:
             if run_max is None:  # Open-ended (e.g., "61+ runs") or single (e.g., "14 runs")
@@ -118,7 +134,8 @@ def process_poll_to_csv(json_data, output_file):
 
     # Parse the margin
     margin_number, margin_unit = parse_margin(json_data.get("margin", ""))
-    if margin_number is None or margin_unit not in ["runs", "wickets"]:
+    if margin_number is None and margin_unit not in ["super_over"] or \
+       margin_number is not None and margin_unit not in ["runs", "wickets"]:
         raise ValueError(f"Invalid margin format: '{json_data.get('margin', '')}'")
 
     # Get custom points for this match, defaulting to 1
@@ -132,7 +149,7 @@ def process_poll_to_csv(json_data, output_file):
     answer_map = {}
     short_name_map = {}
     for answer in json_data['answers']:
-        _, _, _, _, short_name = parse_answer_range(answer['name'], margin_unit)
+        _, _, _, _, _, short_name = parse_answer_range(answer['name'], margin_unit)
         answer_map[answer['id']] = answer['name']
         short_name_map[answer['id']] = short_name
     

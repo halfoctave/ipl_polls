@@ -1,0 +1,563 @@
+{
+  "id": "1bb98134-fede-4095-b474-4ed6d690b73d",
+  "margin": "37 runs",
+  "points": 3,
+  "channelId": "1354399464319615046",
+  "messageId": "1368508981433073726",
+  "type": "Hidden",
+  "votingType": "Buttons",
+  "question": "Predict Winning Margin: 4th May 25, Match #54, PBKS vs LSG, Dharamsala",
+  "description": "<@&1354287895950790786>\n\nFourth and last poll for the day. Like for the last match, **winning margin poll remains to be of 3 points.**\n\n<@&1349362561232928768> vs <@&1349362680695226418>",
+  "imageUrl": null,
+  "maxChoices": 1,
+  "openColor": null,
+  "closedColor": null,
+  "runningColor": null,
+  "resultColor": null,
+  "allowVoteRemove": true,
+  "endsAt": "2025-05-04T13:30:00.000Z",
+  "editedAt": null,
+  "publishedAt": "2025-05-04T08:46:06.660Z",
+  "failed": null,
+  "failedDetail": null,
+  "failedAt": null,
+  "createdAt": "2025-05-04T08:46:06.662Z",
+  "updatedAt": "2025-05-04T13:30:00.640Z",
+  "closedAt": "2025-05-04T13:30:00.639Z",
+  "closedReason": "AutoClosed",
+  "closedById": "437618149505105920",
+  "user": {
+    "id": "727879265764507719",
+    "username": "thefarzi",
+    "discriminator": "0",
+    "globalName": "Farzi",
+    "avatar": "0804ccc64622e988785298f86d03770a",
+    "banner": null
+  },
+  "guild": {
+    "id": "863768044622053396",
+    "name": "Indian Console Gamers",
+    "icon": "a_8c64f9c39698058f69206b8555bc3e63",
+    "banner": "a_68bddf4926b7a826619dfece1cd04757",
+    "preferredLocale": "en-US",
+    "language": null,
+    "openColor": null,
+    "closedColor": null,
+    "runningColor": null,
+    "resultColor": null,
+    "removeVotesOnBan": true,
+    "removeVotesOnKick": true,
+    "removeVotesOnLeave": true,
+    "createThreadWithPoll": false,
+    "lockAndUnlockThreadWithPoll": true
+  },
+  "answers": [
+    {
+      "id": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "name": "Win by 1-10 runs OR by 7-8 wickets",
+      "position": 0,
+      "emoji": {
+        "id": "55ee8700-cbcd-4b97-87d6-35a7e2f16daa",
+        "discordId": "1263915147047735418",
+        "name": "letter_a",
+        "animated": false
+      },
+      "createdAt": "2025-05-04T08:46:06.700Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-04T08:46:06.700Z"
+    },
+    {
+      "id": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "name": "Win by 11-20 runs OR by 9-10 wickets",
+      "position": 1,
+      "emoji": {
+        "id": "0049089f-7b4c-4909-9cd2-3dbc9eded34a",
+        "discordId": "1263915157151678565",
+        "name": "letter_b",
+        "animated": false
+      },
+      "createdAt": "2025-05-04T08:46:06.700Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-04T08:46:06.700Z"
+    },
+    {
+      "id": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "name": "Win by 21-40 runs OR by 1-2 wickets",
+      "position": 2,
+      "emoji": {
+        "id": "a1d9c91a-bede-4270-a73a-c9c6869ac054",
+        "discordId": "1263915168660721816",
+        "name": "letter_c",
+        "animated": false
+      },
+      "createdAt": "2025-05-04T08:46:06.700Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-04T08:46:06.700Z"
+    },
+    {
+      "id": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "name": "Win by 41-60 runs OR by 3-4 wickets",
+      "position": 3,
+      "emoji": {
+        "id": "13ab4cfe-39dd-4e9a-8d40-8be5385ebe36",
+        "discordId": "1263915179796725862",
+        "name": "letter_d",
+        "animated": false
+      },
+      "createdAt": "2025-05-04T08:46:06.700Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-04T08:46:06.700Z"
+    },
+    {
+      "id": "5eb507f8-2543-4e83-b898-dd75db21577f",
+      "name": "Win by 61+ runs OR by 5-6 wickets",
+      "position": 4,
+      "emoji": {
+        "id": "555e47ab-e9d4-4c0e-ac88-adbfbea4b405",
+        "discordId": "1263915189103886467",
+        "name": "letter_e",
+        "animated": false
+      },
+      "createdAt": "2025-05-04T08:46:06.700Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-04T08:46:06.700Z"
+    },
+    {
+      "id": "3e57b6bb-abfb-409d-b970-f6dfe33f722f",
+      "name": "Win by Super Over (Bonus 2 points)",
+      "position": 5,
+      "emoji": {
+        "id": "91d2d59a-e0dc-4b5d-8578-0595b413f5e2",
+        "discordId": "1263915199069556901",
+        "name": "letter_f",
+        "animated": false
+      },
+      "createdAt": "2025-05-04T08:46:06.700Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-04T08:46:06.700Z"
+    }
+  ],
+  "votes": [
+    {
+      "id": "60f526e3-a86c-42de-9d01-94c7d7ee65bb",
+      "answerId": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "weight": 1,
+      "user": {
+        "id": "241887432855781377",
+        "username": "gladiator30",
+        "discriminator": "0",
+        "globalName": "Gladiator",
+        "avatar": "d4c7e76b9b0f14ca40dff63e0c85a777",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:46:20.723Z"
+    },
+    {
+      "id": "d1d307de-7e61-48e1-bab5-dd9e35942320",
+      "answerId": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "weight": 1,
+      "user": {
+        "id": "727879265764507719",
+        "username": "thefarzi",
+        "discriminator": "0",
+        "globalName": "Farzi",
+        "avatar": "0804ccc64622e988785298f86d03770a",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:46:31.519Z"
+    },
+    {
+      "id": "010b276a-6684-4d76-b9ef-130aeef7ff3a",
+      "answerId": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "weight": 1,
+      "user": {
+        "id": "1039518597757800448",
+        "username": "slidemaster0547",
+        "discriminator": "0",
+        "globalName": "Slide Master",
+        "avatar": "b6aa99ba40d27fa310308a8cf1330c74",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:47:11.173Z"
+    },
+    {
+      "id": "2c1dbdb2-0c3e-4590-9489-073833f61b25",
+      "answerId": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "weight": 1,
+      "user": {
+        "id": "532253788615213074",
+        "username": "reflekt_11",
+        "discriminator": "0",
+        "globalName": "Reflekt",
+        "avatar": "05185ca79bc819b47c059adffb12ee94",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:47:19.682Z"
+    },
+    {
+      "id": "e36ab51e-91b0-46e5-b7a4-99f16d0b84b7",
+      "answerId": "5eb507f8-2543-4e83-b898-dd75db21577f",
+      "weight": 1,
+      "user": {
+        "id": "866026163399032872",
+        "username": "jadelessbarukan",
+        "discriminator": "0",
+        "globalName": "jadeless",
+        "avatar": "2d082e9e30f2f849fb4b0cfed7841a35",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:47:35.876Z"
+    },
+    {
+      "id": "d62acc73-99a0-4979-8684-7aef208f7269",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "391998245716492289",
+        "username": "shadow0403bsr",
+        "discriminator": "0",
+        "globalName": "shadow43",
+        "avatar": "c8563bb490e8808185e057d020e6c451",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:48:11.919Z"
+    },
+    {
+      "id": "b1279882-0e31-4271-8a1f-6d70a85aa329",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "962218842409562192",
+        "username": "dag_21",
+        "discriminator": "0",
+        "globalName": "daggr",
+        "avatar": "827522d87d038c023656173b4cdc3594",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:48:22.598Z"
+    },
+    {
+      "id": "5e3abd95-9c7f-4a85-99a3-d359dfee9d8b",
+      "answerId": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "weight": 1,
+      "user": {
+        "id": "757566676186169354",
+        "username": "csharp21",
+        "discriminator": "0",
+        "globalName": "CSharp",
+        "avatar": "fefabed3341805163fd4b02f2097ed2b",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:48:30.754Z"
+    },
+    {
+      "id": "088119c2-31fe-45f0-baa0-1f5ed41bfb4a",
+      "answerId": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "weight": 1,
+      "user": {
+        "id": "671565293084213259",
+        "username": "max._.caulfield",
+        "discriminator": "0",
+        "globalName": "Max",
+        "avatar": "7de7be2b43f1c435da6183106955ca11",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:54:39.336Z"
+    },
+    {
+      "id": "835765c7-c2f8-43ff-a561-edf02b64115c",
+      "answerId": "3e57b6bb-abfb-409d-b970-f6dfe33f722f",
+      "weight": 1,
+      "user": {
+        "id": "879416656525414451",
+        "username": "billuda",
+        "discriminator": "0",
+        "globalName": "BILLUDA",
+        "avatar": "2c2d52727e5dfedd718dcbe1c433f005",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:55:03.634Z"
+    },
+    {
+      "id": "aca09414-80d6-42d4-a3dd-c9d3752ab4d6",
+      "answerId": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "weight": 1,
+      "user": {
+        "id": "693486174316265542",
+        "username": "thewebshooter",
+        "discriminator": "0",
+        "globalName": "TheWebShooter",
+        "avatar": "cd0253acb237f9570f1200d96990141a",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:56:32.257Z"
+    },
+    {
+      "id": "e6b77466-6430-46af-b2be-a1110d61d152",
+      "answerId": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "weight": 1,
+      "user": {
+        "id": "853615271491534849",
+        "username": "tushar07019",
+        "discriminator": "0",
+        "globalName": null,
+        "avatar": "d148a4b7bfffdaa6c08e22613f6aed2d",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T08:57:16.619Z"
+    },
+    {
+      "id": "ca00ef22-dd5c-4674-8bfa-101593c2edbd",
+      "answerId": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "weight": 1,
+      "user": {
+        "id": "561936246679797760",
+        "username": "khanatfarm",
+        "discriminator": "0",
+        "globalName": "KHANatFARM",
+        "avatar": "4d7a18df2a1873279700a0ffc0c7d408",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:05:55.882Z"
+    },
+    {
+      "id": "b56d5e8c-e5a5-4c6e-b6b6-04cadce480d5",
+      "answerId": "3e57b6bb-abfb-409d-b970-f6dfe33f722f",
+      "weight": 1,
+      "user": {
+        "id": "756442479154429972",
+        "username": "gooffyluffyy",
+        "discriminator": "0",
+        "globalName": "Luffy",
+        "avatar": "805ea7a8e9a91dd2fd23810dd98bc7ec",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:08:04.150Z"
+    },
+    {
+      "id": "019f23d7-4f81-46b9-b3cc-72643b664365",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "437513823771951104",
+        "username": "roguehunter15",
+        "discriminator": "0",
+        "globalName": "RogueHunter",
+        "avatar": "0ef795f67d9d1e959467baf44f6fc0fb",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:09:37.228Z"
+    },
+    {
+      "id": "6d36f312-07bd-4b91-ade4-76e9a49d056b",
+      "answerId": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "weight": 1,
+      "user": {
+        "id": "1289948985016193097",
+        "username": "astrobot_7",
+        "discriminator": "0",
+        "globalName": "PS_USER",
+        "avatar": "048340152d755f28ca41b6a2f8129473",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:12:47.086Z"
+    },
+    {
+      "id": "5dd4ee3b-00f8-4929-90af-a351bf2d1f70",
+      "answerId": "3e57b6bb-abfb-409d-b970-f6dfe33f722f",
+      "weight": 1,
+      "user": {
+        "id": "747088426469294100",
+        "username": "insane_dwane",
+        "discriminator": "0",
+        "globalName": "Insane_Dwane",
+        "avatar": "aee0af52b41999d4634360069c78fb85",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:19:49.439Z"
+    },
+    {
+      "id": "cf53970f-e862-475d-9b45-a6b632154a81",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "638989429171683350",
+        "username": "crazybats_v",
+        "discriminator": "0",
+        "globalName": "Casper",
+        "avatar": "afc5072068a5f2b9d8e2ff50ee49aa14",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:20:12.199Z"
+    },
+    {
+      "id": "f4a1e487-9dc3-40fd-aa43-a59f04d3c222",
+      "answerId": "5eb507f8-2543-4e83-b898-dd75db21577f",
+      "weight": 1,
+      "user": {
+        "id": "698899062753067029",
+        "username": "sriprakash",
+        "discriminator": "0",
+        "globalName": "Sri Prakash",
+        "avatar": "c5e7526b9704124791ae2be3cf266c57",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:24:10.986Z"
+    },
+    {
+      "id": "3d6c7f7d-98c1-482f-b069-75948f0576e9",
+      "answerId": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "weight": 1,
+      "user": {
+        "id": "1207280663150075944",
+        "username": "light_itachi_op",
+        "discriminator": "0",
+        "globalName": "Lassi Sassy",
+        "avatar": "1b3817a4dfcfcb0e940b15d3aaccb544",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:28:05.128Z"
+    },
+    {
+      "id": "c856a856-fbeb-437d-af26-5cfb6f3eb9c2",
+      "answerId": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "weight": 1,
+      "user": {
+        "id": "331863826066571265",
+        "username": "apurv5411",
+        "discriminator": "0",
+        "globalName": "APURV",
+        "avatar": "fc47ac4ae93d5d38552d14d8dad1234a",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T09:57:14.180Z"
+    },
+    {
+      "id": "07b0628a-5bc1-4a91-9cc2-956c4e8f1227",
+      "answerId": "84990b52-016f-49f0-bba5-a7233625e9aa",
+      "weight": 1,
+      "user": {
+        "id": "793326932431208449",
+        "username": "roarycat",
+        "discriminator": "0",
+        "globalName": "RoaryCat",
+        "avatar": "d189bd3036b0544e99daf0a25c5d564f",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T10:00:26.746Z"
+    },
+    {
+      "id": "6a3a0dc2-d777-4c34-b02d-53825df9281b",
+      "answerId": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "weight": 1,
+      "user": {
+        "id": "638293504904134656",
+        "username": "fezvaz",
+        "discriminator": "0",
+        "globalName": "Vaz",
+        "avatar": "8aa660c3cd3a714ea5c5c9c7d6e52caa",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T10:26:50.773Z"
+    },
+    {
+      "id": "977b68c2-ef67-4aa6-835c-ae28dd88f91d",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "1046664783946059808",
+        "username": "gane_sh",
+        "discriminator": "0",
+        "globalName": "Gane_sh",
+        "avatar": "1a88f97a6795ed321efde9ded79f393b",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T10:27:45.668Z"
+    },
+    {
+      "id": "0335c9e8-d250-45a9-8e89-d05e5d6965b1",
+      "answerId": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "weight": 1,
+      "user": {
+        "id": "700343196412018779",
+        "username": "static_25",
+        "discriminator": "0",
+        "globalName": "Static",
+        "avatar": "776f8044c377b328fbb311633de453dc",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T11:30:01.183Z"
+    },
+    {
+      "id": "8a75bea6-064e-4fda-a040-12065445395f",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "787279423232933908",
+        "username": "maverick7749",
+        "discriminator": "0",
+        "globalName": "Mav",
+        "avatar": "5fe4c192d00c6268d1a2ae7e50babac3",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T11:52:03.440Z"
+    },
+    {
+      "id": "df14dd86-2b47-4573-a77a-7c271850a1c3",
+      "answerId": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "weight": 1,
+      "user": {
+        "id": "713227266871656478",
+        "username": "rishavmaiti",
+        "discriminator": "0",
+        "globalName": "rishavmaiti",
+        "avatar": "044157919cf467428d9c690b358e34e6",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T12:03:54.103Z"
+    },
+    {
+      "id": "011e7618-c0d9-4aa6-99f6-f7ec2952ee53",
+      "answerId": "ae124c3f-1760-4419-8f72-f735f2a40d42",
+      "weight": 1,
+      "user": {
+        "id": "702737036817334303",
+        "username": "vahgar",
+        "discriminator": "0",
+        "globalName": "Allen The Alien",
+        "avatar": "69afb2f599e6fef069f02746857ff638",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T12:06:15.437Z"
+    },
+    {
+      "id": "2e79aa77-c8af-455c-b1c0-87830922a979",
+      "answerId": "106c609e-75a6-40e3-abfa-534ad4ddd77e",
+      "weight": 1,
+      "user": {
+        "id": "441627155663814656",
+        "username": "emptycases",
+        "discriminator": "0",
+        "globalName": "J",
+        "avatar": "ddd0604a5077b4f56735c67c9f94f47f",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T12:14:02.304Z"
+    },
+    {
+      "id": "e9f4595b-c484-4018-9ad7-b1b7736aba2d",
+      "answerId": "cd20340f-5498-49ee-8b29-40c2716a6933",
+      "weight": 1,
+      "user": {
+        "id": "148100047605596160",
+        "username": "hungry_wolf",
+        "discriminator": "0",
+        "globalName": "HungrY WolF",
+        "avatar": "a77afff3742b19ad116caec0f1c9cf3a",
+        "banner": null
+      },
+      "createdAt": "2025-05-04T12:33:45.905Z"
+    }
+  ],
+  "allowedRoles": []
+}
