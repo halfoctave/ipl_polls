@@ -4,7 +4,7 @@ import json
 from collections import defaultdict
 
 # Set the current week up to which the leaderboard will be generated (e.g., "week1")
-WEEK = "week6"
+WEEK = "week8"
 
 # Flag to control whether playoff points are included
 INCLUDE_PLAYOFFS = False
@@ -149,7 +149,7 @@ def generate_leaderboard():
             print(f"Error processing '{filepath}': {e}")
 
     if INCLUDE_PLAYOFFS:
-        playoff_file = os.path.join(playoff_input_dir, "playoff_prediction.csv")
+        playoff_file = os.path.join(playoff_input_dir, "playoff_predictions.csv")
         if os.path.exists(playoff_file):
             try:
                 with open(playoff_file, newline='', encoding='utf-8-sig') as csvfile:

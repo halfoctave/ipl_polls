@@ -1,0 +1,437 @@
+{
+  "id": "091692f7-af80-4e76-ba17-f96bf2e615ce",
+  "winner": "PBKS",
+  "points": 2,
+  "channelId": "1354399464319615046",
+  "messageId": "1373530317914247209",
+  "type": "Hidden",
+  "votingType": "Buttons",
+  "question": "Predict Today’s Winner: 18th May 25, Match #59, RR vs PBKS, Jaipur",
+  "description": "<@&1354287895950790786>\n\nNot a resumption that we expected yesterday but let’s try again!!! \n\n**Afternoon match of double header day, so this poll is worth 2 points.**\n\n<@&1349360800745127957> vs <@&1349362561232928768>\n\n**Squad:**\nSee attached image below\n\n**Season Form (recent 5 matches, latest at last):**\nRajasthan Royals (#9): <:Lose:1356885187379724360> <:Lose:1356885187379724360> <:Win:1356885132635799612> <:Lose:1356885187379724360> <:Lose:1356885187379724360>\nPunjab Kings (#3): <:Win:1356885132635799612> <:Lose:1356885187379724360> <:nr:1368304426292609166> <:Win:1356885132635799612> <:Win:1356885132635799612>\n\n**Head to Head (last 5 matches):**\nRR <:RajasthanRoyals:1349372888851025930> 3 - 2 <:PunjabKings:1349372883876712448> PBKS\n\n**Head to Head (overall):**\nRR <:RajasthanRoyals:1349372888851025930> 17 - 12 <:PunjabKings:1349372883876712448> PBKS\n\n**Venue Stats (Jaipur):**\nRR <:RajasthanRoyals:1349372888851025930> 5 - 1 <:PunjabKings:1349372883876712448> PBKS",
+  "imageUrl": null,
+  "maxChoices": 1,
+  "openColor": null,
+  "closedColor": null,
+  "runningColor": null,
+  "resultColor": null,
+  "allowVoteRemove": true,
+  "endsAt": "2025-05-18T09:30:00.000Z",
+  "editedAt": null,
+  "publishedAt": "2025-05-18T05:19:06.664Z",
+  "failed": null,
+  "failedDetail": null,
+  "failedAt": null,
+  "createdAt": "2025-05-18T05:19:06.665Z",
+  "updatedAt": "2025-05-18T09:30:00.650Z",
+  "closedAt": "2025-05-18T09:30:00.647Z",
+  "closedReason": "AutoClosed",
+  "closedById": "437618149505105920",
+  "user": {
+    "id": "727879265764507719",
+    "username": "thefarzi",
+    "discriminator": "0",
+    "globalName": "Farzi",
+    "avatar": "0804ccc64622e988785298f86d03770a",
+    "banner": null
+  },
+  "guild": {
+    "id": "863768044622053396",
+    "name": "Indian Console Gamers",
+    "icon": "a_8c64f9c39698058f69206b8555bc3e63",
+    "banner": "a_68bddf4926b7a826619dfece1cd04757",
+    "preferredLocale": "en-US",
+    "language": null,
+    "openColor": null,
+    "closedColor": null,
+    "runningColor": null,
+    "resultColor": null,
+    "removeVotesOnBan": true,
+    "removeVotesOnKick": true,
+    "removeVotesOnLeave": true,
+    "createThreadWithPoll": false,
+    "lockAndUnlockThreadWithPoll": true
+  },
+  "answers": [
+    {
+      "id": "b68bbb49-dd22-4e2c-9ede-8f531f506336",
+      "name": "Rajasthan Royals",
+      "position": 0,
+      "emoji": {
+        "id": "ee324559-bcae-4f6a-8971-3d4149956520",
+        "discordId": "1349372888851025930",
+        "name": "RajasthanRoyals",
+        "animated": false
+      },
+      "createdAt": "2025-05-18T05:19:06.699Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-18T05:19:06.699Z"
+    },
+    {
+      "id": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "name": "Punjab Kings",
+      "position": 1,
+      "emoji": {
+        "id": "a6e089b8-8bb7-493b-b6c1-4347524396b4",
+        "discordId": "1349372883876712448",
+        "name": "PunjabKings",
+        "animated": false
+      },
+      "createdAt": "2025-05-18T05:19:06.699Z",
+      "createdById": "727879265764507719",
+      "updatedAt": "2025-05-18T05:19:06.699Z"
+    }
+  ],
+  "votes": [
+    {
+      "id": "9b958e74-deb5-4489-8016-c159418f227f",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "853615271491534849",
+        "username": "tushar07019",
+        "discriminator": "0",
+        "globalName": null,
+        "avatar": "d148a4b7bfffdaa6c08e22613f6aed2d",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:19:35.759Z"
+    },
+    {
+      "id": "f2acce7a-2a33-4769-8f15-fa6ed82ec0ca",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "866026163399032872",
+        "username": "jadelessbarukan",
+        "discriminator": "0",
+        "globalName": "jadeless",
+        "avatar": "2d082e9e30f2f849fb4b0cfed7841a35",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:19:37.113Z"
+    },
+    {
+      "id": "1618074b-42fd-42ba-a3a2-c90c8b40bda5",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "671565293084213259",
+        "username": "max._.caulfield",
+        "discriminator": "0",
+        "globalName": "Max",
+        "avatar": "58f77d926d7d673fa16abaab6c878096",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:20:07.772Z"
+    },
+    {
+      "id": "0f93767d-02d8-41dd-a556-0aa845728aa7",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "532253788615213074",
+        "username": "reflekt_11",
+        "discriminator": "0",
+        "globalName": "Reflekt",
+        "avatar": "05185ca79bc819b47c059adffb12ee94",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:20:52.863Z"
+    },
+    {
+      "id": "221bc2e9-e1b8-4333-8214-cc1c19c97344",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "727879265764507719",
+        "username": "thefarzi",
+        "discriminator": "0",
+        "globalName": "Farzi",
+        "avatar": "0804ccc64622e988785298f86d03770a",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:23:11.503Z"
+    },
+    {
+      "id": "781aa53c-c93e-4883-93e0-9d34d530b8a2",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "561936246679797760",
+        "username": "khanatfarm",
+        "discriminator": "0",
+        "globalName": "KHANatFARM",
+        "avatar": "4d7a18df2a1873279700a0ffc0c7d408",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:27:29.106Z"
+    },
+    {
+      "id": "8f0d89b4-d6fd-4a58-a126-cb77acda9842",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "148100047605596160",
+        "username": "hungry_wolf",
+        "discriminator": "0",
+        "globalName": "HungrY WolF",
+        "avatar": "a77afff3742b19ad116caec0f1c9cf3a",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:26:20.260Z"
+    },
+    {
+      "id": "7bd2bae1-8609-4433-833d-e563d35d2ccc",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "241887432855781377",
+        "username": "gladiator30",
+        "discriminator": "0",
+        "globalName": "Gladiator",
+        "avatar": "cd72f08ec4a526bcd85afede4e9da158",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:26:21.140Z"
+    },
+    {
+      "id": "78559e96-223a-447c-bcc2-19c202ef6083",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "638989429171683350",
+        "username": "crazybats_v",
+        "discriminator": "0",
+        "globalName": "Casper",
+        "avatar": "afc5072068a5f2b9d8e2ff50ee49aa14",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:29:26.452Z"
+    },
+    {
+      "id": "dcf091d6-d0c3-4444-a00c-69d6380b1332",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "757566676186169354",
+        "username": "csharp21",
+        "discriminator": "0",
+        "globalName": "CSharp",
+        "avatar": "fefabed3341805163fd4b02f2097ed2b",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:29:35.952Z"
+    },
+    {
+      "id": "bd87caee-aebd-4581-88cc-7b0d0b780612",
+      "answerId": "b68bbb49-dd22-4e2c-9ede-8f531f506336",
+      "weight": 1,
+      "user": {
+        "id": "962218842409562192",
+        "username": "dag_21",
+        "discriminator": "0",
+        "globalName": "daggr",
+        "avatar": "827522d87d038c023656173b4cdc3594",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:30:22.779Z"
+    },
+    {
+      "id": "258ffa12-a34c-46d5-99be-c5bdd532b64f",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "693486174316265542",
+        "username": "thewebshooter",
+        "discriminator": "0",
+        "globalName": "TheWebShooter",
+        "avatar": "cd0253acb237f9570f1200d96990141a",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:30:28.327Z"
+    },
+    {
+      "id": "30cae9be-27d9-4fe4-b1dd-c09a66cb4afe",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "437513823771951104",
+        "username": "roguehunter15",
+        "discriminator": "0",
+        "globalName": "RogueHunter",
+        "avatar": "0ef795f67d9d1e959467baf44f6fc0fb",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:38:52.121Z"
+    },
+    {
+      "id": "c8006931-1633-4a19-a4f3-4c0a06f13a62",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "747088426469294100",
+        "username": "insane_dwane",
+        "discriminator": "0",
+        "globalName": "Insane_Dwane",
+        "avatar": "aee0af52b41999d4634360069c78fb85",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:44:05.764Z"
+    },
+    {
+      "id": "2bc2918b-b100-488a-8001-dc256224fc60",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "638293504904134656",
+        "username": "fezvaz",
+        "discriminator": "0",
+        "globalName": "Vaz",
+        "avatar": "b39a6412c883bd52705e19e381bac825",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:44:28.671Z"
+    },
+    {
+      "id": "4e9c17bc-9923-483f-b022-7e467f084c55",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "1039518597757800448",
+        "username": "slidemaster0547",
+        "discriminator": "0",
+        "globalName": "Jason Duval",
+        "avatar": "9d0d7218de23c203ae8d2aa265d056a3",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T05:43:47.914Z"
+    },
+    {
+      "id": "45ccb28d-d34f-4be1-a10e-32f6700893c6",
+      "answerId": "b68bbb49-dd22-4e2c-9ede-8f531f506336",
+      "weight": 1,
+      "user": {
+        "id": "793326932431208449",
+        "username": "roarycat",
+        "discriminator": "0",
+        "globalName": "RoaryCat",
+        "avatar": "ff98f46407be5238fbbb3a4ae9fd940c",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T06:03:09.228Z"
+    },
+    {
+      "id": "da883b9e-182b-49b3-a1c6-bc34cdc7a71b",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "441627155663814656",
+        "username": "emptycases",
+        "discriminator": "0",
+        "globalName": "J",
+        "avatar": "a_81e8da21b9853697d56f67191d31190f",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T06:04:31.992Z"
+    },
+    {
+      "id": "cfe46f07-c8fa-4f06-91dc-150e32dfc9cf",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "700343196412018779",
+        "username": "static_25",
+        "discriminator": "0",
+        "globalName": "Static",
+        "avatar": "776f8044c377b328fbb311633de453dc",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T06:07:08.717Z"
+    },
+    {
+      "id": "8b36011e-89d8-4116-a45b-ea7da4fefb62",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "331863826066571265",
+        "username": "apurv5411",
+        "discriminator": "0",
+        "globalName": "APURV",
+        "avatar": "fc47ac4ae93d5d38552d14d8dad1234a",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T06:23:15.254Z"
+    },
+    {
+      "id": "190af06b-f2d7-4952-a5ad-2332bc36259e",
+      "answerId": "b68bbb49-dd22-4e2c-9ede-8f531f506336",
+      "weight": 1,
+      "user": {
+        "id": "756442479154429972",
+        "username": "gooffyluffyy",
+        "discriminator": "0",
+        "globalName": "Luffy",
+        "avatar": "1805ecb16b71bbbeef648fee7d26112e",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T06:36:29.091Z"
+    },
+    {
+      "id": "623de2ae-b2f6-4b68-b818-40fb642cca80",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "702737036817334303",
+        "username": "vahgar",
+        "discriminator": "0",
+        "globalName": "Beluga",
+        "avatar": "f7b66ce7dfac1f6f212bdf4ba0333892",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T07:06:41.139Z"
+    },
+    {
+      "id": "7104fb4f-7a03-418d-b71b-580857eadbc5",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "787279423232933908",
+        "username": "maverick7749",
+        "discriminator": "0",
+        "globalName": "Mav",
+        "avatar": "5fe4c192d00c6268d1a2ae7e50babac3",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T08:07:15.716Z"
+    },
+    {
+      "id": "f55499d0-8f28-463b-b1b3-0fd4d3c0c3fb",
+      "answerId": "b68bbb49-dd22-4e2c-9ede-8f531f506336",
+      "weight": 1,
+      "user": {
+        "id": "879416656525414451",
+        "username": "billuda",
+        "discriminator": "0",
+        "globalName": "BILLUDA",
+        "avatar": "2c2d52727e5dfedd718dcbe1c433f005",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T08:50:33.336Z"
+    },
+    {
+      "id": "1630a998-a93e-411e-8a6d-79c36b23410b",
+      "answerId": "6c9269c0-a7de-4d0b-ac6d-32745ce709bc",
+      "weight": 1,
+      "user": {
+        "id": "1289948985016193097",
+        "username": "astrobot_7",
+        "discriminator": "0",
+        "globalName": "PS_USER",
+        "avatar": "048340152d755f28ca41b6a2f8129473",
+        "banner": null
+      },
+      "createdAt": "2025-05-18T08:51:01.692Z"
+    }
+  ],
+  "allowedRoles": []
+}

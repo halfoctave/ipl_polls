@@ -3,8 +3,8 @@ import os
 import re
 from collections import defaultdict
 
-# Set the final week to process (e.g., "week6")
-WEEK = "week6"
+# Set the final week to process (e.g., "week8")
+WEEK = "week8"
 
 def get_overall_winner_top_n(file_path, n=3):
     """
@@ -74,6 +74,36 @@ def is_washed_out_match(match_path):
         points = [float(row['Points']) for row in reader]
         return all(p == 0 for p in points) and points  # Ensure non-empty
 
+def get_participation_count(base_dir, username, poll_type='poll_winner'):
+    """
+    Count the number of matches a user participated in for the specified poll type.
+    
+    Args:
+        base_dir (str): Base directory containing weekX/poll_winner or poll_margin folders
+        username (str): Username to check
+        poll_type (str): 'poll_winner' or 'poll_margin'
+    Returns:
+        int: Number of matches the user voted in
+    """
+    count = 0
+    for week in sorted(os.listdir(base_dir)):
+        if not week.startswith('week'):
+            continue
+        week_dir = os.path.join(base_dir, week, poll_type)
+        if not os.path.exists(week_dir):
+            continue
+        for match_file in os.listdir(week_dir):
+            if not match_file.endswith('.csv'):
+                continue
+            match_path = os.path.join(week_dir, match_file)
+            with open(match_path, 'r', encoding='utf-8-sig') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    if row['Username'] == username:
+                        count += 1
+                        break
+    return count
+
 def get_winning_streak(base_dir, excluded_users, n=3):
     """
     Find the top N members with the longest winning streaks in winner polls, excluding specified users.
@@ -84,7 +114,7 @@ def get_winning_streak(base_dir, excluded_users, n=3):
         excluded_users (set): Set of usernames to exclude
         n (int): Number of top streak winners to return
     Returns:
-        list: List of (username, display_name, streak_length, start_poll, end_poll, start_num) tuples
+        list: List of (username, display_name, streak_length, start_poll, end_poll, participation_count) tuples
     """
     streaks = defaultdict(list)  # username -> list of (poll_file, points)
     display_names = {}
@@ -150,18 +180,18 @@ def get_winning_streak(base_dir, excluded_users, n=3):
                 current_streak = 0
         
         if max_user_streak > 0:
-            start_num = int(re.match(r'(\d+)-', votes[best_start_idx][0]).group(1))
+            participation_count = get_participation_count(base_dir, username, 'poll_winner')
             streak_list.append((
                 username,
                 display_names[username],
                 max_user_streak,
                 votes[best_start_idx][0],
                 votes[best_end_idx][0],
-                start_num  # For sorting ties
+                participation_count  # For tie-breaking
             ))
     
-    # Sort by streak length (descending) and earliest start match (ascending) for ties
-    streak_list.sort(key=lambda x: (-x[2], x[5]))
+    # Sort by streak length (descending) and participation count (descending) for ties
+    streak_list.sort(key=lambda x: (-x[2], -x[5]))
     return streak_list[:n]
 
 def get_overall_winning_streak(base_dir):
@@ -171,7 +201,7 @@ def get_overall_winning_streak(base_dir):
     Args:
         base_dir (str): Base directory containing weekX/poll_winner folders
     Returns:
-        tuple: (username, display_name, streak_length, start_poll, end_poll, start_num) or None
+        tuple: (username, display_name, streak_length, start_poll, end_poll, participation_count) or None
     """
     return get_winning_streak(base_dir, set(), n=1)[0] if get_winning_streak(base_dir, set(), n=1) else None
 
@@ -184,7 +214,7 @@ def get_losing_streak(base_dir, n=3):
         base_dir (str): Base directory containing weekX/poll_winner folders
         n (int): Number of top streak losers to return
     Returns:
-        list: List of (username, display_name, streak_length, start_poll, end_poll, start_num) tuples
+        list: List of (username, display_name, streak_length, start_poll, end_poll, participation_count) tuples
     """
     streaks = defaultdict(list)  # username -> list of (poll_file, points)
     display_names = {}
@@ -248,18 +278,18 @@ def get_losing_streak(base_dir, n=3):
                 current_streak = 0
         
         if max_user_streak > 0:
-            start_num = int(re.match(r'(\d+)-', votes[best_start_idx][0]).group(1))
+            participation_count = get_participation_count(base_dir, username, 'poll_winner')
             streak_list.append((
                 username,
                 display_names[username],
                 max_user_streak,
                 votes[best_start_idx][0],
                 votes[best_end_idx][0],
-                start_num  # For sorting ties
+                participation_count  # For tie-breaking
             ))
     
-    # Sort by streak length (descending) and earliest start match (ascending) for ties
-    streak_list.sort(key=lambda x: (-x[2], x[5]))
+    # Sort by streak length (descending) and participation count (descending) for ties
+    streak_list.sort(key=lambda x: (-x[2], -x[5]))
     return streak_list[:n]
 
 def get_overall_losing_streak(base_dir):
@@ -269,7 +299,7 @@ def get_overall_losing_streak(base_dir):
     Args:
         base_dir (str): Base directory containing weekX/poll_winner folders
     Returns:
-        tuple: (username, display_name, streak_length, start_poll, end_poll, start_num) or None
+        tuple: (username, display_name, streak_length, start_poll, end_poll, participation_count) or None
     """
     return get_losing_streak(base_dir, n=1)[0] if get_losing_streak(base_dir, n=1) else None
 
@@ -307,14 +337,21 @@ def get_top_csk_voters(base_dir, n=3):
                         csk_votes[username].append(match_num)
                     display_names[username] = display_name
     
-    # Sort users by number of CSK votes
-    voters = [
-        (username, display_names[username], len(votes), votes)
-        for username, votes in csk_votes.items()
-    ]
-    voters.sort(key=lambda x: x[2], reverse=True)
+    # Sort users by number of CSK votes and participation count
+    voters = []
+    for username, votes in csk_votes.items():
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
+        voters.append((
+            username,
+            display_names[username],
+            len(votes),
+            votes,
+            participation_count
+        ))
+    voters.sort(key=lambda x: (-x[2], -x[4]))
     
-    return voters[:n]
+    # Return only the required fields
+    return [(username, display_name, vote_count, votes) for username, display_name, vote_count, votes, _ in voters[:n]]
 
 def main():
     """
@@ -355,30 +392,36 @@ def main():
     # Add winner poll winners
     for i, (username, display_name, points) in enumerate(winner_top_3, 1):
         prize = f"Predict the Winner - {i}{'st' if i == 1 else 'nd' if i == 2 else 'rd'} Place"
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
         output_lines.append(f"{prize}:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: Total Points: {points}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Add margin poll winner
     if margin_winner:
         username, display_name, points = margin_winner
+        participation_count = get_participation_count(base_dir, username, 'poll_margin')
         output_lines.append("Predict the Winning Margin - 1st Place:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: Total Points: {points}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Add winning streaks
     for i, (username, display_name, streak, start_poll, end_poll, _) in enumerate(winning_streaks, 1):
         start_num = int(re.match(r'(\d+)-', start_poll).group(1))
         end_num = int(re.match(r'(\d+)-', end_poll).group(1))
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
         prize = f"Longest Winning Streak - {i}{'st' if i == 1 else 'nd' if i == 2 else 'rd'}"
         output_lines.append(f"{prize}:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: Winning Streak: {streak} matches, Starting from Match #{start_num} to Match #{end_num}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Add overall winning streak
@@ -386,21 +429,25 @@ def main():
         username, display_name, streak, start_poll, end_poll, _ = overall_winning_streak
         start_num = int(re.match(r'(\d+)-', start_poll).group(1))
         end_num = int(re.match(r'(\d+)-', end_poll).group(1))
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
         output_lines.append("Overall Longest Winning Streak:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: Winning Streak: {streak} matches, Starting from Match #{start_num} to Match #{end_num}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Add losing streaks
     for i, (username, display_name, streak, start_poll, end_poll, _) in enumerate(losing_streaks, 1):
         start_num = int(re.match(r'(\d+)-', start_poll).group(1))
         end_num = int(re.match(r'(\d+)-', end_poll).group(1))
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
         prize = f"Longest Losing Streak - {i}{'st' if i == 1 else 'nd' if i == 2 else 'rd'}"
         output_lines.append(f"{prize}:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: Losing Streak: {streak} matches, Starting from Match #{start_num} to Match #{end_num}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Add overall losing streak
@@ -408,21 +455,25 @@ def main():
         username, display_name, streak, start_poll, end_poll, _ = overall_losing_streak
         start_num = int(re.match(r'(\d+)-', start_poll).group(1))
         end_num = int(re.match(r'(\d+)-', end_poll).group(1))
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
         output_lines.append("Overall Longest Losing Streak:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: Losing Streak: {streak} matches, Starting from Match #{start_num} to Match #{end_num}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Add top CSK voters
     for i, (username, display_name, vote_count, matches) in enumerate(top_csk_voters, 1):
         match_details = [f"Match #{match_num}" for match_num in sorted(matches, key=int)]
         details = f"Voted for CSK {vote_count} times: {', '.join(match_details)}"
+        participation_count = get_participation_count(base_dir, username, 'poll_winner')
         prize = f"Top CSK Voter - {i}{'st' if i == 1 else 'nd' if i == 2 else 'rd'}"
         output_lines.append(f"{prize}:")
         output_lines.append(f"  Username: {username}")
         output_lines.append(f"  Display Name: {display_name}")
         output_lines.append(f"  Details: {details}")
+        output_lines.append(f"  Voted in {participation_count} matches")
         output_lines.append("")
     
     # Write to text file

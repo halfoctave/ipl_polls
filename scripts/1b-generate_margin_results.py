@@ -4,7 +4,7 @@ import os
 import re
 
 # Set the current week to process (e.g., "week1")
-WEEK = "week6"
+WEEK = "week8"
 
 def parse_margin(margin_str):
     """
